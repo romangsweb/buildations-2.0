@@ -1,52 +1,29 @@
-'use client';
+import Link from 'next/link'
+import { getArticles } from '@/lib/payload'
+import styles from '@/styles/LatestResearch.module.css'
 
-import Link from 'next/link';
-import styles from '@/styles/LatestResearch.module.css';
+export default async function LatestResearch() {
+  const articles = await getArticles(3)
 
-const MOCK_POSTS = [
-  {
-    slug: 'the-new-primitives',
-    title: 'The New Primitives: Prompting as a Design Tool',
-    date: '2026-04-01',
-    readTime: '5 min',
-  },
-  {
-    slug: 'latent-spaces',
-    title: 'Navigating Latent Spaces in Architectural Generation',
-    date: '2026-03-15',
-    readTime: '8 min',
-  },
-  {
-    slug: 'synthetic-typography',
-    title: 'Synthetic Typography and the Grotesk Revival',
-    date: '2026-02-28',
-    readTime: '4 min',
-  },
-];
-
-export default function LatestResearch() {
   return (
-    <section className={styles.research}>
+    <section className={styles.section}>
       <div className={styles.header}>
-        <p className={styles.label} data-reveal>Research</p>
-        <Link href="/research" className={styles.viewAll} data-reveal>
-          View All Index →
-        </Link>
+        <span className={styles.number}>02</span>
+        <span className={styles.label}>Research</span>
       </div>
-
       <div className={styles.grid}>
-        {MOCK_POSTS.map((post, i) => (
-          <Link href={`/research/${post.slug}`} key={post.slug} className={styles.card} data-reveal style={{ transitionDelay: `${i * 0.1}s` }}>
-            <div className={styles.cardMeta}>
-              <span>{post.date}</span>
-              <span>{post.readTime}</span>
+        {articles.map((article: any) => (
+          <Link key={article.slug} href={`/research/${article.slug}`} className={styles.card}>
+            <div className={styles.meta}>
+              <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
+              <span>{article.readTime || '5 min'}</span>
             </div>
-            <h3 className={styles.cardTitle}>{post.title}</h3>
-            <div className={styles.cardAction}>Read Article</div>
+            <h3 className={styles.title}>{article.title}</h3>
+            <span className={styles.cta}>Read Article</span>
           </Link>
         ))}
       </div>
-      <span className={styles.decNumber} aria-hidden="true">03</span>
+      <Link href="/research" className={styles.viewAll}>View All Index →</Link>
     </section>
-  );
+  )
 }

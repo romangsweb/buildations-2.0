@@ -1,36 +1,26 @@
-import Link from 'next/link';
-import { engines } from '@/lib/data';
-import styles from './Engines.module.css';
+import Link from 'next/link'
+import { getEngines } from '@/lib/payload'
+import styles from './Engines.module.css'
 
-export const metadata = {
-  title: 'Engines | Infrastructure',
-};
+export default async function EnginesPage() {
+  const engines = await getEngines()
 
-export default function EnginesIndex() {
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.container}>
-          <h1 className={styles.title} data-reveal>Engines</h1>
-          <p className={styles.subtitle} data-reveal>
-            La infraestructura de modelos AI que corre en nuestro servidor. No es documentación, es una exhibición de nuestras herramientas.
-          </p>
-        </div>
-      </header>
-
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Engines</h1>
+      </div>
       <div className={styles.list}>
-        {engines.map((engine) => (
-          <Link href={`/engines/${engine.slug}`} key={engine.slug} className={styles.card} style={{ backgroundColor: engine.color }}>
-            <div className={styles.cardInner}>
-              <h2 className={styles.cardTitle} data-reveal>{engine.name}</h2>
-              <p className={styles.description} data-reveal>{engine.description}</p>
-              <span className={styles.exploreBtn} data-reveal>Explore Engine →</span>
+        {engines.map((engine: any) => (
+          <Link key={engine.slug} href={`/engines/${engine.slug}`} className={styles.item} style={{ backgroundColor: engine.color === 'yellow' ? '#F5E642' : engine.color === 'blue' ? '#1A3BFF' : engine.color === 'green' ? '#2EFF6E' : engine.color === 'red' ? '#FF2E2E' : '#0A0A0A' }}>
+            <span className={styles.number}>{String(engine.order || 1).padStart(2, '0')}</span>
+            <div className={styles.info}>
+              <h2 className={styles.name}>{engine.name}</h2>
+              <p className={styles.tagline}>{engine.tagline}</p>
             </div>
-            {/* Dec number */}
-            <span className={styles.decNumber}>{engine.number}</span>
           </Link>
         ))}
       </div>
-    </div>
-  );
+    </main>
+  )
 }

@@ -1,69 +1,26 @@
-'use client';
+import Link from 'next/link'
+import { getArticles } from '@/lib/payload'
+import styles from './Research.module.css'
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { articles } from '@/lib/data';
-import styles from './Research.module.css';
-
-const categories = ['All', 'Design', 'Architecture', 'Typography', 'AI'];
-
-export default function ResearchIndex() {
-  const [filter, setFilter] = useState('All');
-
-  const filtered = filter === 'All' 
-    ? articles 
-    : articles.filter(a => a.category === filter);
+export default async function ResearchPage() {
+  const articles = await getArticles(50)
 
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.container}>
-          <h1 className={styles.title} data-reveal>Research</h1>
-          <p className={styles.subtitle} data-reveal>
-            Ensayos, síntesis y notas sobre el impacto de la IA en la creatividad tecnológica.
-          </p>
-
-          <div className={styles.filters} data-reveal>
-            {categories.map(c => (
-              <button
-                key={c}
-                onClick={() => setFilter(c)}
-                className={`${styles.filterBtn} ${filter === c ? styles.activeFilter : ''}`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
-      </header>
-
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Research</h1>
+      </div>
       <div className={styles.list}>
-        {filtered.map((article, i) => (
-          <article 
-            key={article.slug} 
-            className={styles.card} 
-            style={{ backgroundColor: article.color, color: 'var(--white)' }}
-            data-reveal
-          >
-            <div className={styles.cardInner}>
-              <div className={styles.meta}>
-                <span>{article.category}</span>
-                <span>{article.readTime}</span>
-              </div>
-              <h2 className={styles.cardTitle}>
-                <Link href={`/research/${article.slug}`}>{article.title}</Link>
-              </h2>
-              <p className={styles.excerpt}>{article.excerpt}</p>
-              <div className={styles.footer}>
-                <span>{article.date}</span>
-                <span>Read →</span>
-              </div>
+        {articles.map((article: any) => (
+          <Link key={article.slug} href={`/research/${article.slug}`} className={styles.item}>
+            <div className={styles.meta}>
+              <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
+              <span>{article.excerpt || ''}</span>
             </div>
-            {/* Dec number */}
-            <span className={styles.decNumber}>0{i + 1}</span>
-          </article>
+            <h2 className={styles.articleTitle}>{article.title}</h2>
+          </Link>
         ))}
       </div>
-    </div>
-  );
+    </main>
+  )
 }

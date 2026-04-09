@@ -1,0 +1,49 @@
+/* Intro Block — Yellow */
+.intro {
+  background: var(--yellow);
+  color: var(--black);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--margin);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.5;
+}
+
+.statement {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+
+.decNumber {
+  position: absolute;
+  top: 50%;
+  right: var(--margin);
+  transform: translateY(-50%);
+  font-size: clamp(200px, 28vw, 420px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--black);
+  opacity: 0.05;
+  user-select: none;
+  pointer-events: none;
+}

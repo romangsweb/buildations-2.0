@@ -1,0 +1,158 @@
+/* Season Gallery — White block */
+
+.gallery {
+  background: var(--white);
+  color: var(--black);
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 88px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+/* Season switcher */
+.switcher {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.seasonBtn {
+  background: transparent;
+  border: 1px solid rgba(10, 10, 10, 0.2);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.seasonBtn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.seasonBtnActive {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+/* Featured image */
+.featured {
+  margin-bottom: 16px;
+}
+
+.featuredImg {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.featuredImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.featuredImg:hover img {
+  transform: scale(1.03);
+}
+
+.featuredMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.imgNum {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.imgLabel {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+/* Thumbnail strip */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.thumb {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  background: transparent;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.thumb:hover {
+  opacity: 0.75;
+}
+
+.thumb:hover img {
+  transform: scale(1.05);
+}
+
+.thumbActive {
+  opacity: 1;
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .strip { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .switcher { gap: 4px; }
+  .seasonBtn { padding: 6px 12px; font-size: 10px; }
+}

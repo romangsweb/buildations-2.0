@@ -1,0 +1,41 @@
+/* ============================================================
+   BUILDATIONS — Design Tokens
+   Block color system: each section = one solid color + its opposite
+   ============================================================ */
+
+:root {
+  /* Color blocks */
+  --black:   #0A0A0A;
+  --white:   #F5F5F0;
+  --yellow:  #F5E642;
+  --blue:    #1A3BFF;
+  --green:   #2EFF6E;
+  --red:     #FF2D2D;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', sans-serif;
+
+  --size-hero:    clamp(72px, 13vw, 200px);
+  --size-section: clamp(56px, 9vw, 140px);
+  --size-engine:  clamp(64px, 11vw, 160px);
+  --size-label:   12px;
+  --size-body:    17px;
+  --size-meta:    14px;
+
+  --leading-tight: 0.92;
+  --leading-body:  1.65;
+
+  --tracking-label: 0.18em;
+  --tracking-hero:  -0.03em;
+
+  /* Layout */
+  --col: 12;
+  --gap: clamp(16px, 3vw, 40px);
+  --margin: clamp(24px, 5vw, 80px);
+  --section-min: 100vh;
+
+  /* Timing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --duration: 0.6s;
+}

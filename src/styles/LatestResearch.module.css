@@ -1,0 +1,141 @@
+/* Latest Research — Blue */
+.research {
+  background: var(--blue);
+  color: var(--white);
+  min-height: 100vh;
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  font-size: clamp(40px, 6vw, 88px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.viewAll {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(245, 245, 240, 0.2);
+}
+
+.viewAll:hover {
+  opacity: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background: rgba(10, 10, 10, 0.2);
+  border: 1px solid rgba(245, 245, 240, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s, transform 0.3s var(--ease-out);
+  aspect-ratio: 1;
+  justify-content: space-between;
+}
+
+.card:hover {
+  background: var(--black);
+  transform: translateY(-8px);
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.cardTitle {
+  font-size: clamp(24px, 2vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: auto;
+  margin-bottom: 32px;
+}
+
+.cardAction {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s var(--ease-out);
+}
+
+.card:hover .cardAction {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.decNumber {
+  position: absolute;
+  top: 50%;
+  right: var(--margin);
+  transform: translateY(-50%);
+  font-size: clamp(200px, 28vw, 420px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--white);
+  opacity: 0.05;
+  user-select: none;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+}

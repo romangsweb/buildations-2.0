@@ -1,0 +1,92 @@
+.about {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.5;
+}
+
+/* Block Variations */
+.blockBlack {
+  background: var(--black);
+  color: var(--white);
+}
+
+.blockYellow {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+.blockWhite {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* Typography styles */
+.statement {
+  font-size: clamp(40px, 5vw, 80px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+}
+
+.subhead {
+  font-size: clamp(24px, 2vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.text {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  max-width: 45ch;
+  opacity: 0.8;
+}
+
+.authorName {
+  font-size: clamp(80px, 10vw, 160px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin-bottom: 32px;
+}
+
+.authorBio {
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.4;
+  max-width: 35ch;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

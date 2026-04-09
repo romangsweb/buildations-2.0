@@ -1,0 +1,48 @@
+/* Footer Module */
+
+.footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 40px var(--margin);
+  border-top: 1px solid rgba(245, 245, 240, 0.12);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.links {
+  display: flex;
+  gap: 32px;
+}
+
+.links a {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.links a:hover {
+  opacity: 1;
+}
+
+.copy {
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  opacity: 0.3;
+}

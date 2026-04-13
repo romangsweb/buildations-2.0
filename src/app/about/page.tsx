@@ -45,7 +45,7 @@ export default function AboutPage() {
           <p className={styles.label} data-reveal>Director</p>
           <h2 className={styles.authorName} data-reveal>Román</h2>
           <p className={styles.authorBio} data-reveal>
-            Investigador, diseñador y desarrollador. Combinando años de experiencia en arquitectura de software corporativa (SAP) con exploración en IA generativa aplicada.
+            Construyendo infraestructura de inteligencia desde cero. Cada motor, cada decisión, cada línea de código es un argumento sobre cómo deberían funcionar las cosas.
           </p>
         </div>
       </section>

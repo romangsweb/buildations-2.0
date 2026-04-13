@@ -3,6 +3,8 @@ import '@/styles/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RevealInit from '@/components/RevealInit';
+import CustomCursor from '@/components/CustomCursor';
+import ScrollProgress from '@/components/ScrollProgress';
 
 export const metadata: Metadata = {
   title: {
@@ -30,6 +32,8 @@ export default function RootLayout({
       <body>
         <Navbar />
         <RevealInit />
+        <CustomCursor />
+        <ScrollProgress />
         <main>{children}</main>
         <Footer />
       </body>

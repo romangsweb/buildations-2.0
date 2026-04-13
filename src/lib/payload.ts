@@ -36,3 +36,12 @@ export async function getActiveImages(season?: string) {
   const data = await res.json()
   return data.docs
 }
+
+export async function getEngineBySlug(slug: string) {
+  const res = await fetch(`${PAYLOAD_URL}/api/engines?where[slug][equals]=${slug}&where[active][equals]=true`, {
+    next: { revalidate: 0 }
+  })
+  if (!res.ok) return null
+  const data = await res.json()
+  return data.docs[0] || null
+}

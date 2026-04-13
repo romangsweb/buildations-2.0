@@ -7,8 +7,12 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-  const engines = await getEngines()
-  return engines.map((e: any) => ({ slug: e.slug }))
+  try {
+    const engines = await getEngines()
+    return engines.filter((e: any) => e.slug).map((e: any) => ({ slug: e.slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props) {

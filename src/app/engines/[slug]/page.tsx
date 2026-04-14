@@ -69,6 +69,31 @@ const ENGINE_DATA = {
     ],
     solves: 'RevOps is not a dashboard problem. It is a signal problem. Sales teams are sitting on the data that predicts who will buy — they just cannot see it. This engine surfaces those signals daily, in the tools the team already uses, before the opportunity closes.',
   }
+,
+  'search-presence': {
+    flow: [
+      ['01', 'Signal extraction', 'Real search console data — updated daily — is analyzed to find topics where the site has search visibility but is not converting it into traffic. Real demand, not estimated volume.'],
+      ['02', 'Competitive analysis', 'For each opportunity, the engine fetches the top-ranking pages, embeds their content into Qdrant, and identifies what structure and angle is winning — and what is missing.'],
+      ['03', 'Dual-LLM generation', 'A writer model (gemma3:12b) drafts the full article. An auditor model (llama3.2:3b) reviews it against quality standards. If it fails, the writer rewrites. Up to 3 cycles before the draft is accepted.'],
+      ['04', 'AI answer optimization', 'A separate agent structures content for AI answer engines — ChatGPT, Perplexity, Claude. The format is different from traditional SEO: direct answers, clear sourcing, machine-readable context files.'],
+      ['05', 'Presence monitoring', 'The engine actively queries AI systems with 10 strategic questions and checks whether the site appears in the response. AI citation is tracked as a metric, not left to chance.'],
+    ],
+    stats: [
+      ['367K', 'Search data rows updated daily'],
+      ['2', 'LLMs in the writing loop'],
+      ['10', 'Strategic AI queries monitored'],
+      ['3', 'Max QA cycles per article'],
+    ],
+    capabilities: [
+      ['Data-driven opportunities', 'Every content decision starts with real search data. Topics with existing visibility but low traffic are the highest-signal opportunities the engine pursues.'],
+      ['Competitive content analysis', 'Before writing anything, the engine reads and embeds what is already ranking. It knows the gap before it fills it.'],
+      ['Writer + auditor loop', 'Two models work in sequence: one writes, one audits. The auditor applies editorial standards and sends failing drafts back for revision. Quality is enforced, not assumed.'],
+      ['AI answer formatting', 'Content is structured to be cited by AI systems — not just indexed by search engines. Direct answers, clear structure, and machine-readable context via llms.txt.'],
+      ['Active presence monitoring', 'The engine checks AI-generated answers for site citations across 10 strategic queries. Tracked weekly — not rankings, actual appearances in AI responses.'],
+      ['Freshness tracking', 'Published content is monitored for traffic decay. The engine flags pages that need updating before they drop — targeted refresh, not full rewrites.'],
+    ],
+    solves: 'Search is splitting in two. There is Google — and there are the AI systems that millions of people now ask instead of searching. Most content strategies are built for one of them. This engine covers both, from the same data pipeline, running every day. Any industry. Any language. Any content type.',
+  }
 } as const
 
 export async function generateMetadata({ params }: Props) {

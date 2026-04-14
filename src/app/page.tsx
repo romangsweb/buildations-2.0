@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/home/Hero';
 import IntroBlock from '@/components/home/IntroBlock';
 import LatestResearch from '@/components/home/LatestResearch';
+import FeaturedEngines from '@/components/home/FeaturedEngines';
 
 export const metadata: Metadata = {
   title: 'Buildations — AI Research & Intelligence',
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Hero />
       <IntroBlock />
       <LatestResearch />
+      <FeaturedEngines />
     </>
   );
 }

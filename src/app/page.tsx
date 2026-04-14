@@ -14,8 +14,8 @@ export default function HomePage() {
     <>
       <Hero />
       <IntroBlock />
-      <LatestResearch />
       <FeaturedEngines />
+      <LatestResearch />
     </>
   );
 }

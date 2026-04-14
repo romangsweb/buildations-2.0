@@ -150,7 +150,7 @@ export default async function EnginePage({ params }: Props) {
               <div className={styles.flowList}>
                 {data.flow.map(([num, title, text]) => (
                   <div key={num} className={styles.flowStep}>
-                    <span className={styles.flowNum}>{num}</span>
+                    <span className={styles.flowNum} data-num={num} />
                     <div className={styles.flowContent}>
                       <h3 className={styles.flowTitle}>{title}</h3>
                       <p className={styles.flowText}>{text}</p>
@@ -190,6 +190,12 @@ export default async function EnginePage({ params }: Props) {
             <div className={styles.solvesContainer}>
               <p className={styles.sectionLabel} style={{ color: 'rgba(255,255,255,0.4)' }}>What it solves</p>
               <p className={styles.solvesText}>{data.solves}</p>
+            </div>
+          </section>
+          <section className={styles.ctaSection}>
+            <div className={styles.ctaContainer}>
+              <p className={styles.ctaText}>Work with this engine</p>
+              <a href="/contact" className={styles.ctaBtn}>Get in touch →</a>
             </div>
           </section>
         </>

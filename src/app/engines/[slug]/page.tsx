@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { getEngineBySlug } from '@/lib/payload'
 import styles from './EnginePage.module.css'
 import SecuritySimulator from '@/components/SecuritySimulator'
+import RevenueSimulator from '@/components/RevenueSimulator'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -150,6 +151,14 @@ export default async function EnginePage({ params }: Props) {
               <div className={styles.flowContainer}>
                 <p className={styles.sectionLabel}>Live simulation</p>
                 <SecuritySimulator />
+              </div>
+            </section>
+          )}
+          {engine.slug === 'revenue-intelligence' && (
+            <section className={styles.simulatorSection}>
+              <div className={styles.flowContainer}>
+                <p className={styles.sectionLabel}>Deal scoring demo</p>
+                <RevenueSimulator />
               </div>
             </section>
           )}

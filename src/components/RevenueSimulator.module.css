@@ -1,0 +1,207 @@
+.simulator {
+  background: var(--black);
+  color: var(--white);
+  padding: 40px;
+  border-radius: 12px;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.tab {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s;
+}
+.tab:hover { color: rgba(255,255,255,0.7); }
+.tabActive { color: var(--white); border-bottom-color: var(--white); }
+.grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 16px;
+}
+.cardLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+.company {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.metaTag {
+  font-size: 12px;
+  font-weight: 600;
+}
+.metaDivider { opacity: 0.3; }
+.metaVal { font-size: 12px; opacity: 0.5; }
+.tierRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tierDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tierLabel { font-size: 13px; font-weight: 500; }
+.signalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.signalRow:last-child { border-bottom: none; }
+.signalKey { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.05em; }
+.signalVal { font-size: 12px; font-weight: 500; }
+.right {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.scoreReveal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+}
+.revealHint { font-size: 14px; opacity: 0.4; }
+.runBtn {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 12px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+.runBtn:hover { opacity: 0.8; }
+.output {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.scoreHeader {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 20px;
+}
+.score {
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.scoreMeter {
+  width: 24px;
+  height: 80px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.scoreMeterFill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 0.8s ease;
+}
+.factors {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.factor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 12px;
+}
+.factor:last-child { border-bottom: none; }
+.factorLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.factorLabel { font-size: 13px; font-weight: 500; }
+.factorDetail { font-size: 11px; opacity: 0.4; }
+.factorDelta {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+.diagnosis {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 16px;
+}
+.diagnosisText { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+.recommendation {
+  border-left: 3px solid var(--white);
+  padding-left: 16px;
+}
+.recommendationText { font-size: 14px; font-weight: 600; }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .simulator { padding: 20px 16px; }
+}

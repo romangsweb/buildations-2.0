@@ -11,22 +11,45 @@ export async function generateStaticParams() {
 
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'
 
+function renderInline(children: any[]): any {
+  if (!children) return null
+  return children.map((c: any, j: number) => {
+    if (c.type === 'linebreak') return <br key={j} />
+    let node: any = c.text || ''
+    if (!node) return null
+    if (c.format & 1) node = <strong key={j}>{node}</strong>
+    else if (c.format & 2) node = <em key={j}>{node}</em>
+    else if (c.format & 8) node = <u key={j}>{node}</u>
+    else if (c.format & 16) node = <code key={j}>{node}</code>
+    else node = <span key={j}>{node}</span>
+    return node
+  })
+}
+
 function renderContent(content: any) {
   if (!content?.root?.children) return null
   return content.root.children.map((block: any, i: number) => {
-    const text = block.children?.map((c: any) => c.text || '').join('') || ''
-    if (!text.trim()) return null
-    if (block.type === 'paragraph') {
-      if (text.startsWith('# ')) return <h1 key={i}>{text.slice(2)}</h1>
-      if (text.startsWith('## ')) return <h2 key={i}>{text.slice(3)}</h2>
-      if (text.startsWith('### ')) return <h3 key={i}>{text.slice(4)}</h3>
-      return <p key={i}>{text}</p>
-    }
     if (block.type === 'heading') {
       const Tag = `h${block.tag?.replace('h', '') || 2}` as any
-      return <Tag key={i}>{text}</Tag>
+      return <Tag key={i}>{renderInline(block.children)}</Tag>
     }
-    return <p key={i}>{text}</p>
+    if (block.type === 'paragraph') {
+      const inline = renderInline(block.children)
+      const hasContent = block.children?.some((c: any) => c.text?.trim())
+      if (!hasContent) return null
+      return <p key={i}>{inline}</p>
+    }
+    if (block.type === 'list') {
+      const Tag = block.listType === 'number' ? 'ol' : 'ul'
+      return (
+        <Tag key={i}>
+          {block.children?.map((item: any, j: number) => (
+            <li key={j}>{renderInline(item.children)}</li>
+          ))}
+        </Tag>
+      )
+    }
+    return null
   })
 }
 

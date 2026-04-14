@@ -1,0 +1,76 @@
+.page {
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--black);
+}
+.hero {
+  padding: clamp(140px, 20vh, 200px) var(--margin) 80px;
+  background: var(--black);
+  color: var(--white);
+}
+.container {
+  max-width: 1200px;
+}
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 32px;
+}
+.title {
+  font-size: clamp(40px, 8vw, 120px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+.sub {
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  max-width: 40ch;
+  opacity: 0.6;
+}
+.formSection {
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+.formContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 80px;
+  align-items: start;
+}
+.formWrap {
+  min-height: 400px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 8px;
+}
+.infoBlock {}
+.infoLabel {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+.infoValue {
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

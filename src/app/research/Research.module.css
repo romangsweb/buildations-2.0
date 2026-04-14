@@ -5,7 +5,7 @@
 }
 
 .header {
-  padding: clamp(100px, 20vh, 200px) var(--margin) 80px;
+  padding: clamp(100px, 20vh, 200px) var(--margin) 120px;
   background: var(--white);
 }
 

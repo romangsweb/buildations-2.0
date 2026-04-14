@@ -5,7 +5,7 @@
 }
 
 .header {
-  padding: clamp(140px, 20vh, 200px) var(--margin) 80px;
+  padding: clamp(100px, 20vh, 200px) var(--margin) 80px;
   background: var(--white);
 }
 
@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-size: clamp(80px, 12vw, 180px);
+  font-size: clamp(40px, 12vw, 180px);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 0.9;
@@ -61,7 +61,7 @@
 }
 
 .cardTitle {
-  font-size: clamp(60px, 8vw, 140px);
+  font-size: clamp(32px, 8vw, 140px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 0.9;
@@ -98,7 +98,7 @@
   top: 50%;
   right: var(--margin);
   transform: translateY(-50%);
-  font-size: clamp(200px, 30vw, 500px);
+  font-size: clamp(100px, 30vw, 500px);
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1;

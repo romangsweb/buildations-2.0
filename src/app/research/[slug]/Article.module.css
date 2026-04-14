@@ -7,7 +7,7 @@
 .header {
   background: var(--theme, var(--black));
   color: var(--white);
-  padding: clamp(140px, 20vh, 200px) var(--margin) clamp(80px, 12vh, 120px);
+  padding: clamp(100px, 20vh, 200px) var(--margin) clamp(80px, 12vh, 120px);
 }
 
 .container {
@@ -27,7 +27,7 @@
 }
 
 .title {
-  font-size: clamp(48px, 7vw, 100px);
+  font-size: clamp(32px, 7vw, 100px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 0.95;

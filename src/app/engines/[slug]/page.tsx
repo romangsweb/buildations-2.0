@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getEngineBySlug } from '@/lib/payload'
 import styles from './EnginePage.module.css'
+import SecuritySimulator from '@/components/SecuritySimulator'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -144,6 +145,14 @@ export default async function EnginePage({ params }: Props) {
 
       {data && (
         <>
+          {engine.slug === 'adaptive-security' && (
+            <section className={styles.simulatorSection}>
+              <div className={styles.flowContainer}>
+                <p className={styles.sectionLabel}>Live simulation</p>
+                <SecuritySimulator />
+              </div>
+            </section>
+          )}
           <section className={styles.flowSection}>
             <div className={styles.flowContainer}>
               <p className={styles.sectionLabel}>How it works</p>

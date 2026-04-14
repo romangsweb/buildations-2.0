@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import styles from './Article.module.css'
 
 export const dynamic = 'force-dynamic'
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   return []

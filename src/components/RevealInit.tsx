@@ -19,7 +19,17 @@ export default function RevealInit() {
     const targets = document.querySelectorAll('[data-reveal]');
     targets.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Fallback: reveal visible elements after 800ms
+    const fallback = setTimeout(() => {
+      targets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          (el as HTMLElement).classList.add('revealed');
+        }
+      });
+    }, 800);
+
+    return () => { observer.disconnect(); clearTimeout(fallback); };
   }, []);
 
   return null;

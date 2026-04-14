@@ -46,6 +46,7 @@
 .content {
   padding: clamp(80px, 10vh, 140px) var(--margin);
   background: var(--white);
+  color: var(--black);
 }
 
 .containerText {

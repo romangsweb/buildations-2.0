@@ -40,7 +40,15 @@ export default async function EnginesPage() {
               key={engine.slug}
               href={`/engines/${engine.slug}`}
               className={styles.card}
-              style={{ backgroundColor: bg, color }}
+              style={{
+                backgroundColor: bg,
+                color,
+                ...(engine.coverImage?.url ? {
+                  backgroundImage: `linear-gradient(${bg}dd, ${bg}dd), url(${engine.coverImage.url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                } : {})
+              }}
             >
               <div className={styles.cardInner}>
                 <div className={styles.meta} style={{ opacity: 0.5 }}>

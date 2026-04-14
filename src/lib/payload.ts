@@ -19,7 +19,7 @@ export async function getArticleBySlug(slug: string) {
 }
 
 export async function getEngines() {
-  const res = await fetch(`${PAYLOAD_URL}/api/engines?where[active][equals]=true&sort=order`, {
+  const res = await fetch(`${PAYLOAD_URL}/api/engines?where[active][equals]=true&sort=order&depth=1`, {
     cache: 'no-store'
   })
   if (!res.ok) return []
@@ -38,7 +38,7 @@ export async function getActiveImages(season?: string) {
 }
 
 export async function getEngineBySlug(slug: string) {
-  const res = await fetch(`${PAYLOAD_URL}/api/engines?where[slug][equals]=${slug}&where[active][equals]=true`, {
+  const res = await fetch(`${PAYLOAD_URL}/api/engines?where[slug][equals]=${slug}&where[active][equals]=true&depth=1`, {
     cache: 'no-store'
   })
   if (!res.ok) return null

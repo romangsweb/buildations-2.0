@@ -8,7 +8,7 @@ export default async function LatestResearch() {
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <span className={styles.number}>02</span>
+        <span className={styles.number}>04</span>
         <span className={styles.label}>Research</span>
       </div>
       <div className={styles.grid}>

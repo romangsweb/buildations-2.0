@@ -68,10 +68,12 @@ export default function AboutPage() {
 
       <section className={`${styles.block} ${styles.blockBlack}`}>
         <div className={styles.container}>
-          <p className={styles.label} data-reveal>Director</p>
-          <h2 className={styles.authorName} data-reveal>Román García</h2>
-          <p className={styles.authorBio} data-reveal>
-            Researcher, builder, Ciudad de México. Building Buildations as a proof of concept for what serious AI infrastructure looks like when you start from the ground up.
+          <p className={styles.label} data-reveal>Who We Are</p>
+          <h2 className={styles.statement} data-reveal style={{ fontSize: 'clamp(32px, 4vw, 64px)' }}>
+            Buildations is not a company. It is not a team. It is a working method — a set of principles applied consistently to hard problems. The work speaks. The infrastructure runs. The rest is noise.
+          </h2>
+          <p className={styles.text} data-reveal style={{ marginTop: '40px', opacity: 0.6, maxWidth: '60ch', fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: 1.5 }}>
+            Built in Ciudad de México. Designed to run anywhere.
           </p>
         </div>
       </section>

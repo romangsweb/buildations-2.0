@@ -1,5 +1,6 @@
 import styles from './Contact.module.css'
 import type { Metadata } from 'next'
+import HubSpotForm from '@/components/HubSpotForm'
 
 export const metadata: Metadata = {
   title: 'Contact | Buildations',
@@ -21,13 +22,7 @@ export default function ContactPage() {
       <section className={styles.formSection}>
         <div className={styles.formContainer}>
           <div className={styles.formWrap}>
-            <script src="https://js.hsforms.net/forms/embed/51346021.js" defer></script>
-            <div
-              className="hs-form-frame"
-              data-region="na1"
-              data-form-id="0e5436e6-719d-4936-a18f-12af2ce2ed50"
-              data-portal-id="51346021"
-            />
+            <HubSpotForm />
           </div>
           <div className={styles.info}>
             <div className={styles.infoBlock}>

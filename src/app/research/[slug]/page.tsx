@@ -34,10 +34,14 @@ function renderContent(content: any) {
       return <Tag key={i}>{renderInline(block.children)}</Tag>
     }
     if (block.type === 'paragraph') {
-      const inline = renderInline(block.children)
       const hasContent = block.children?.some((c: any) => c.text?.trim())
       if (!hasContent) return null
-      return <p key={i}>{inline}</p>
+      const firstText = block.children?.[0]?.text || ''
+      if (firstText.startsWith('#### ')) return <h4 key={i}>{firstText.slice(5)}</h4>
+      if (firstText.startsWith('### ')) return <h3 key={i}>{firstText.slice(4)}</h3>
+      if (firstText.startsWith('## ')) return <h2 key={i}>{firstText.slice(3)}</h2>
+      if (firstText.startsWith('# ')) return <h1 key={i}>{firstText.slice(2)}</h1>
+      return <p key={i}>{renderInline(block.children)}</p>
     }
     if (block.type === 'list') {
       const Tag = block.listType === 'number' ? 'ol' : 'ul'

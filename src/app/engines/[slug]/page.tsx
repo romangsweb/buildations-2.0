@@ -44,6 +44,31 @@ const ENGINE_DATA = {
     ],
     solves: 'Most security systems react. This one learns. The difference is not speed — it is that every attack makes the next defense stronger. No alert fatigue. No missed patterns. No manual triage.',
   }
+,
+  'revenue-intelligence': {
+    flow: [
+      ['01', 'ICP mapping', 'The engine starts with who actually buys. Industries are tiered by historical win rate — tier 1, tier 2, hidden gems. A lead from the right industry starts with a different score than one from the wrong one.'],
+      ['02', 'Signal collection', 'Each deal is evaluated across 12 signals: industry fit, traffic source, ticket size, buying role of the contact, engagement depth, stage velocity, and pipeline history.'],
+      ['03', 'Buying role detection', 'Talking to an end user without a decision maker is a leading indicator of loss. The engine detects who is in the room and adjusts the score accordingly.'],
+      ['04', 'ML prediction', 'A Random Forest and Gradient Boosting ensemble trained on closed deals produces a 0-100 score with full attribution. Not a number. A diagnosis.'],
+      ['05', 'RevOps sync', 'Scores write back to the CRM daily. Sales teams see updated signals in their existing workflow. No new dashboards, no new logins. The intelligence meets them where they work.'],
+    ],
+    stats: [
+      ['12', 'Scoring signals'],
+      ['7.6pts', 'Delta won vs lost deals'],
+      ['Daily', 'Model refresh cycle'],
+      ['0', 'New tools required'],
+    ],
+    capabilities: [
+      ['ICP tier scoring', 'Industries are classified by win rate into tiers. The engine knows which verticals close and weights every deal from that industry accordingly.'],
+      ['Buying role detection', 'Decision maker, influencer, or end user — the engine reads who is involved and penalizes patterns that historically lead to loss.'],
+      ['Source attribution', 'Not all leads are equal. The model learns which acquisition channels produce deals that close, not just deals that start.'],
+      ['Ticket size signals', 'Deal size is a proxy for seriousness and organizational fit. Enterprise deals from the right industry score higher regardless of stage.'],
+      ['Explainable output', 'Every score comes with a breakdown: which signals are lifting it, which are dragging it down, and what the team should act on.'],
+      ['LangGraph agent', 'A 7-node reasoning agent reads active deals, generates natural language summaries of risk and opportunity, and flags deals needing immediate attention.'],
+    ],
+    solves: 'RevOps is not a dashboard problem. It is a signal problem. Sales teams are sitting on the data that predicts who will buy — they just cannot see it. This engine surfaces those signals daily, in the tools the team already uses, before the opportunity closes.',
+  }
 } as const
 
 export async function generateMetadata({ params }: Props) {

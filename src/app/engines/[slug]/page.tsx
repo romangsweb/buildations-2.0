@@ -3,6 +3,7 @@ import { getEngineBySlug } from '@/lib/payload'
 import styles from './EnginePage.module.css'
 import SecuritySimulator from '@/components/SecuritySimulator'
 import RevenueSimulator from '@/components/RevenueSimulator'
+import SearchSimulator from '@/components/SearchSimulator'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -159,6 +160,14 @@ export default async function EnginePage({ params }: Props) {
               <div className={styles.flowContainer}>
                 <p className={styles.sectionLabel}>Deal scoring demo</p>
                 <RevenueSimulator />
+              </div>
+            </section>
+          )}
+          {engine.slug === 'search-presence' && (
+            <section className={styles.simulatorSection}>
+              <div className={styles.flowContainer}>
+                <p className={styles.sectionLabel}>Content engine demo</p>
+                <SearchSimulator />
               </div>
             </section>
           )}

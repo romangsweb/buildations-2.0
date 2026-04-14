@@ -14,6 +14,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
+  const ENGINE_IMAGES: Record<string, string> = {
+    'revenue-intelligence': 'https://cms.buildations.com/api/media/file/engine-1776179832.png',
+    'search-presence': 'https://cms.buildations.com/api/media/file/engine-1776180600.png',
+    'adaptive-security': 'https://cms.buildations.com/api/media/file/engine-1776180988.png',
+  }
   const { slug } = await params
   const engine = await getEngineBySlug(slug)
   return {
@@ -22,6 +27,11 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function EnginePage({ params }: Props) {
+  const ENGINE_IMAGES: Record<string, string> = {
+    'revenue-intelligence': 'https://cms.buildations.com/api/media/file/engine-1776179832.png',
+    'search-presence': 'https://cms.buildations.com/api/media/file/engine-1776180600.png',
+    'adaptive-security': 'https://cms.buildations.com/api/media/file/engine-1776180988.png',
+  }
   const { slug } = await params
   const engine = await getEngineBySlug(slug)
   if (!engine) notFound()
@@ -36,7 +46,15 @@ export default async function EnginePage({ params }: Props) {
 
   return (
     <div className={styles.page}>
-      <section className={styles.hero} style={{ backgroundColor: bgColor, color: textColor }}>
+      <section className={styles.hero} style={{
+        backgroundColor: bgColor,
+        color: textColor,
+        ...(ENGINE_IMAGES[engine.slug] ? {
+          backgroundImage: `linear-gradient(${bgColor}e6, ${bgColor}e6), url(${ENGINE_IMAGES[engine.slug]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        } : {})
+      }}>
         <div className={styles.container}>
           <p className={styles.label}>Core Engine // {order}</p>
           <h1 className={styles.title}>{engine.name}</h1>

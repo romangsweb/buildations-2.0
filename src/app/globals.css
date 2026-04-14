@@ -1,4 +1,16 @@
 :root {
+  --margin: clamp(24px, 6vw, 120px);
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --yellow: #F5E642;
+  --green: #2EFF6E;
+  --blue: #1A3BFF;
+  --red: #FF2E2E;
+  --size-label: 12px;
+  --tracking-label: 0.1em;
+  --size-body: clamp(16px, 1.5vw, 20px);
+  --leading-body: 1.6;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
   --background: #ffffff;
   --foreground: #171717;
 }

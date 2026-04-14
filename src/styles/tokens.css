@@ -13,7 +13,7 @@
   --red:     #FF2D2D;
 
   /* Typography */
-  --font-sans: 'Space Grotesk', sans-serif;
+  --font-sans: 'Poppins', sans-serif;
 
   --size-hero:    clamp(72px, 13vw, 200px);
   --size-section: clamp(56px, 9vw, 140px);

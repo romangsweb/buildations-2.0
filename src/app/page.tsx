@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/home/Hero';
-import SeasonGallery from '@/components/home/SeasonGallery';
 import IntroBlock from '@/components/home/IntroBlock';
 import LatestResearch from '@/components/home/LatestResearch';
 
@@ -13,7 +12,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <SeasonGallery />
       <IntroBlock />
       <LatestResearch />
     </>

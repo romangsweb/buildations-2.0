@@ -67,7 +67,7 @@ export default function SeasonGallery() {
       <div className={styles.header}>
         <div>
           <p className={styles.label}>Gallery</p>
-          <h2 className={styles.title} data-reveal>
+          <h2 className={styles.title}>
             {current.label}
           </h2>
         </div>

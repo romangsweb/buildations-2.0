@@ -22,7 +22,7 @@ export default function IntroBlock() {
           </p>
           <a href="/research" className={styles.cta}>→ Read the research</a>
         </div>
-        <span className={styles.decNumber} aria-hidden="true">04</span>
+        <span className={styles.decNumber} aria-hidden="true">02</span>
       </section>
       <section className={styles.stats}>
         {stats.map((s, i) => (

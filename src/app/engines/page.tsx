@@ -2,6 +2,12 @@ import Link from 'next/link'
 import { getEngines } from '@/lib/payload'
 import styles from './Engines.module.css'
 
+const ENGINE_IMAGES: Record<string, string> = {
+  'revenue-intelligence': 'https://cms.buildations.com/api/media/file/engine-1776179832.png',
+  'search-presence': 'https://cms.buildations.com/api/media/file/engine-1776180600.png',
+  'adaptive-security': 'https://cms.buildations.com/api/media/file/engine-1776180988.png',
+}
+
 const COLOR_MAP: Record<string, string> = {
   yellow: '#F5E642',
   blue: '#1A3BFF',
@@ -43,8 +49,8 @@ export default async function EnginesPage() {
               style={{
                 backgroundColor: bg,
                 color,
-                ...(engine.coverImage?.url ? {
-                  backgroundImage: `linear-gradient(${bg}dd, ${bg}dd), url(${engine.coverImage.url})`,
+                ...(ENGINE_IMAGES[engine.slug] ? {
+                  backgroundImage: `linear-gradient(${bg}dd, ${bg}dd), url(${ENGINE_IMAGES[engine.slug]})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 } : {})

@@ -6,13 +6,10 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
-  try {
-    const engines = await getEngines()
-    return engines.filter((e: any) => e.slug).map((e: any) => ({ slug: e.slug }))
-  } catch {
-    return []
-  }
+  return []
 }
 
 export async function generateMetadata({ params }: Props) {

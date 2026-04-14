@@ -2,9 +2,10 @@ import { getArticleBySlug, getArticles } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import styles from './Article.module.css'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
-  const articles = await getArticles(100)
-  return articles.map((article: any) => ({ slug: article.slug }))
+  return []
 }
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {

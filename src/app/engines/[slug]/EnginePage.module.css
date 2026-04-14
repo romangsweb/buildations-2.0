@@ -187,3 +187,134 @@
   .containerGrid { grid-template-columns: 1fr; gap: 40px; }
   .dataViz { border-left-width: 10px; border-top: 10px solid var(--green); border-left: none; }
 }
+
+
+/* Engine detail sections */
+.flowSection {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+.flowContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sectionLabel {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 64px;
+}
+.flowList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.flowStep {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  align-items: start;
+}
+.flowNum {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  opacity: 0.2;
+}
+.flowContent {}
+.flowTitle {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.flowText {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  opacity: 0.65;
+  max-width: 55ch;
+}
+.statsSection {
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+.statsGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.statBlock {
+  padding: 48px 32px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.statNum {
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.statLabel {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.capabilitiesSection {
+  background: var(--white);
+  color: var(--black);
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+.capabilitiesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.capabilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 64px;
+}
+.capabilityItem {}
+.capabilityTitle {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid currentColor;
+}
+.capabilityText {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  opacity: 0.7;
+}
+.solvesSection {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(100px, 15vh, 200px) var(--margin);
+}
+.solvesContainer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.solvesText {
+  font-size: clamp(24px, 3.5vw, 52px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .capabilitiesGrid { grid-template-columns: 1fr; }
+  .flowStep { grid-template-columns: 48px 1fr; gap: 20px; }
+}

@@ -136,6 +136,24 @@
   to { opacity: 0.4; }
 }
 
+.wordWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.wordBase {
+  color: rgba(255,255,255,0.15);
+}
+
+.wordFill {
+  position: absolute;
+  inset: 0;
+  color: var(--white);
+  clip-path: inset(100% 0% 0% 0%);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .decNumber { display: none; }
   .sub { font-size: 18px; }

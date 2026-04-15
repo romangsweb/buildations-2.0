@@ -1,4 +1,3 @@
-'use client'
 import styles from './LatexRenderer.module.css'
 
 interface Props {
@@ -6,8 +5,9 @@ interface Props {
 }
 
 export default function LatexRenderer({ content }: Props) {
+  if (!content) return null
+
   const toHtml = (text: string) => {
-    if (!text) return ''
     return text
       .split('\n\n')
       .map(para => {

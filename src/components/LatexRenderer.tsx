@@ -17,20 +17,20 @@ function latexToHtml(text: string): string {
     .replace(/\\texttt\{([^}]+)\}/g, '<code>$1</code>')
     .replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>')
     .replace(/\\underline\{([^}]+)\}/g, '<u>$1</u>')
-    .replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, function(_, items) {
+    .replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, function(_: string, items: string) {
       const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s: string) { return '<li>' + s.trim() + '</li>' }).join('')
       return '<ul>' + lis + '</ul>'
     })
-    .replace(/\\begin\{enumerate\}([\s\S]*?)\\end\{enumerate\}/g, function(_, items) {
+    .replace(/\\begin\{enumerate\}([\s\S]*?)\\end\{enumerate\}/g, function(_: string, items: string) {
       const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s: string) { return '<li>' + s.trim() + '</li>' }).join('')
       return '<ol>' + lis + '</ol>'
     })
     .replace(/\\section\{([^}]+)\}/g, '<h2>$1</h2>')
     .replace(/\\subsection\{([^}]+)\}/g, '<h3>$1</h3>')
-    .replace(/\\begin\{table\}[\s\S]*?\\begin\{tabular\}[^}]*\}([\s\S]*?)\\end\{tabular\}[\s\S]*?\\end\{table\}/g, function(_, content) {
-      const rows = content.split('\\\\').map(function(r) { return r.replace(/\\hline/g, '').trim() }).filter(Boolean)
-      const html = rows.map(function(row, i) {
-        const cells = row.split('&').map(function(c) { return latexToHtml(c.trim()) })
+    .replace(/\\begin\{table\}[\s\S]*?\\begin\{tabular\}[^}]*\}([\s\S]*?)\\end\{tabular\}[\s\S]*?\\end\{table\}/g, function(_: string, content: string) {
+      const rows = content.split('\\\\').map(function(r: string) { return r.replace(/\\hline/g, '').trim() }).filter(Boolean)
+      const html = rows.map(function(row: string, i: number) {
+        const cells = row.split('&').map(function(c: string) { return latexToHtml(c.trim()) })
         const tag = i === 0 ? 'th' : 'td'
         return '<tr>' + cells.map(function(c) { return '<' + tag + '>' + c + '</' + tag + '>' }).join('') + '</tr>'
       }).join('')
@@ -42,15 +42,15 @@ function latexToHtml(text: string): string {
 }
 
 function renderMath(html: string, katex: any): string {
-  html = html.replace(/\$\$([\s\S]+?)\$\$/g, function(_, math) {
+  html = html.replace(/\$\$([\s\S]+?)\$\$/g, function(_: string, math: string) {
     try { return '<div class="katex-block">' + katex.renderToString(math.trim(), { displayMode: true, throwOnError: false }) + '</div>' }
     catch { return '<div class="katex-error">' + math + '</div>' }
   })
-  html = html.replace(/\\begin\{equation\}([\s\S]+?)\\end\{equation\}/g, function(_, math) {
+  html = html.replace(/\\begin\{equation\}([\s\S]+?)\\end\{equation\}/g, function(_: string, math: string) {
     try { return '<div class="katex-block">' + katex.renderToString(math.trim(), { displayMode: true, throwOnError: false }) + '</div>' }
     catch { return '<div class="katex-error">' + math + '</div>' }
   })
-  html = html.replace(/\$([^\$\n]+?)\$/g, function(_, math) {
+  html = html.replace(/\$([^\$\n]+?)\$/g, function(_: string, math: string) {
     try { return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false }) }
     catch { return '<span class="katex-error">' + math + '</span>' }
   })
@@ -59,7 +59,7 @@ function renderMath(html: string, katex: any): string {
 
 function processContent(text: string): string {
   if (!text) return ''
-  return text.split('\n\n').map(function(para) {
+  return text.split('\n\n').map(function(para: string) {
     if (para.startsWith('## ')) return '<h2>' + para.replace(/^## /, '') + '</h2>'
     if (para.startsWith('# ')) return '<h1>' + para.replace(/^# /, '') + '</h1>'
     const transformed = latexToHtml(para)

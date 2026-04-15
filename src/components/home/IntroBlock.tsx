@@ -3,9 +3,13 @@ import styles from '@/styles/IntroBlock.module.css';
 
 const stats = [
   { num: '3', label: 'Engines in production' },
-  { num: '57', label: 'Services orchestrated' },
+  { num: '52', label: 'Docker containers running' },
   { num: '1.4M+', label: 'Security events processed' },
+  { num: '338', label: 'Research articles published' },
+  { num: '9', label: 'Threat monitoring sources' },
   { num: '0', label: 'Critical cloud dependencies' },
+  { num: '367K', label: 'Search data rows updated daily' },
+  { num: '24/7', label: 'Autonomous operation' },
 ];
 
 export default function IntroBlock() {

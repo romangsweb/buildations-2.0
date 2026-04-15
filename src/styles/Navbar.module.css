@@ -93,3 +93,16 @@
   .menuBtn { display: block; }
   .navLink { font-size: 20px; letter-spacing: 0.1em; }
 }
+
+.navDark .logo,
+.navDark .navLink,
+.navDark .menuBtn { color: var(--white); }
+
+.navLight .logo,
+.navLight .navLink,
+.navLight .menuBtn { color: var(--black); }
+
+.navLight.scrolled {
+  background: rgba(245,245,240,0.9);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}

@@ -15,7 +15,9 @@ const ENGINE_LABEL: Record<string, string> = {
   'search-presence': 'Search & Presence',
 }
 
-export default async function ResearchPage() {
+export default async function ResearchPage({ searchParams }: { searchParams: Promise<{ view?: string }> }) {
+  const { view } = await searchParams
+  const activeView = view === 'cases' ? 'cases' : 'articles'
   const articles = await getArticles(50)
   const cases = await getCaseStudies(20)
   return (
@@ -24,9 +26,17 @@ export default async function ResearchPage() {
         <div className={styles.container}>
           <h1 className={styles.title}>Research</h1>
           <p className={styles.subtitle}>Field notes from the build.</p>
+          <div className={styles.toggle}>
+            <a href="/research" className={`${styles.toggleBtn} ${activeView === 'articles' ? styles.toggleActive : ''}`}>
+              Articles {articles.length > 0 && <span className={styles.toggleCount}>{articles.length}</span>}
+            </a>
+            <a href="/research?view=cases" className={`${styles.toggleBtn} ${activeView === 'cases' ? styles.toggleActive : ''}`}>
+              Case Studies {cases.length > 0 && <span className={styles.toggleCount}>{cases.length}</span>}
+            </a>
+          </div>
         </div>
       </div>
-      <div className={styles.list}>
+      {activeView === 'articles' && <div className={styles.list}>
         {articles.map((article: any, i: number) => (
           <Link
             key={article.slug}
@@ -49,8 +59,8 @@ export default async function ResearchPage() {
             <span className={styles.decNumber} aria-hidden="true">0{i + 1}</span>
           </Link>
         ))}
-      </div>
-      {cases.length > 0 && (
+      </div>}
+      {activeView === 'cases' && cases.length > 0 && (
         <div className={styles.casesSection}>
           <div className={styles.casesHeader}>
             <div className={styles.container}>

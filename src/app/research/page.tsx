@@ -18,15 +18,12 @@ const ENGINE_LABEL: Record<string, string> = {
 export default async function ResearchPage() {
   const articles = await getArticles(50)
   const cases = await getCaseStudies(20)
-  console.log("[Research] cases count:", cases?.length, "first:", cases?.[0]?.title)
   return (
     <div className={styles.page}>
       <div className={styles.header}>
         <div className={styles.container}>
           <h1 className={styles.title}>Research</h1>
-          <p className={styles.subtitle}>
-            Field notes from the build.
-          </p>
+          <p className={styles.subtitle}>Field notes from the build.</p>
         </div>
       </div>
       <div className={styles.list}>
@@ -53,8 +50,6 @@ export default async function ResearchPage() {
           </Link>
         ))}
       </div>
-    </div>
-
       {cases.length > 0 && (
         <div className={styles.casesSection}>
           <div className={styles.casesHeader}>
@@ -64,10 +59,8 @@ export default async function ResearchPage() {
             </div>
           </div>
           <div className={styles.casesList}>
-            {cases.map((cs: any, i: number) => {
+            {cases.map((cs: any) => {
               const color = ENGINE_COLOR[cs.engine] || '#0A0A0A'
-              const isDark = cs.engine === 'adaptive-security' || cs.engine === 'search-presence'
-              const textColor = isDark ? '#ffffff' : '#0A0A0A'
               return (
                 <Link
                   key={cs.slug}

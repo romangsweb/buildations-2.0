@@ -1,3 +1,5 @@
+'use client'
+import { useEffect, useRef } from 'react'
 import styles from './LatexRenderer.module.css'
 
 interface Props {
@@ -5,9 +7,46 @@ interface Props {
 }
 
 export default function LatexRenderer({ content }: Props) {
-  if (!content) return null
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!ref.current || !content) return
+
+    const render = async () => {
+      const katex = (await import('katex')).default
+      if (!ref.current) return
+
+      let html = ref.current.innerHTML
+
+      // Block math $$...$$
+      html = html.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
+        try {
+          return `<div class="katex-block">${katex.renderToString(math.trim(), { displayMode: true, throwOnError: false })}</div>`
+        } catch { return `<div class="katex-error">${math}</div>` }
+      })
+
+      // Inline math $...$
+      html = html.replace(/\$([^\$\n]+?)\$/g, (_, math) => {
+        try {
+          return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false })
+        } catch { return `<span class="katex-error">${math}</span>` }
+      })
+
+      // LaTeX \begin{equation}...\end{equation}
+      html = html.replace(/\\begin\{equation\}([\s\S]+?)\\end\{equation\}/g, (_, math) => {
+        try {
+          return `<div class="katex-block">${katex.renderToString(math.trim(), { displayMode: true, throwOnError: false })}</div>`
+        } catch { return `<div class="katex-error">${math}</div>` }
+      })
+
+      ref.current.innerHTML = html
+    }
+
+    render()
+  }, [content])
 
   const toHtml = (text: string) => {
+    if (!text) return ''
     return text
       .split('\n\n')
       .map(para => {
@@ -24,6 +63,7 @@ export default function LatexRenderer({ content }: Props) {
 
   return (
     <div
+      ref={ref}
       className={styles.latex}
       dangerouslySetInnerHTML={{ __html: toHtml(content) }}
     />

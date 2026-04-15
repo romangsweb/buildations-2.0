@@ -1,0 +1,181 @@
+.page {
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--black);
+}
+.header {
+  padding: clamp(120px, 18vh, 180px) var(--margin) clamp(60px, 8vh, 100px);
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.breadcrumb {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0.7;
+}
+.breadcrumb a { text-decoration: none; }
+.meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.engineTag, .industryTag, .difficultyTag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+.title {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  max-width: 18ch;
+}
+.summary {
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.6;
+  opacity: 0.75;
+  max-width: 55ch;
+}
+.outcomes {
+  background: var(--black);
+  color: var(--white);
+  padding: 0;
+}
+.outcomesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.outcome {
+  padding: clamp(40px, 6vh, 72px) var(--margin);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.outcome:last-child { border-right: none; }
+.outcomeValue {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.outcomeMetric {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.outcomeDesc {
+  font-size: 13px;
+  opacity: 0.4;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+.content {
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+.contentContainer {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.tableSection {}
+.sectionTitle {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--black);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.table td {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.tdBefore { opacity: 0.5; }
+.tdAfter { font-weight: 600; }
+.section {}
+.richText {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.75;
+  color: rgba(10,10,10,0.8);
+}
+.richText h2 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.02em; }
+.richText h3 { font-size: clamp(18px, 2vw, 22px); font-weight: 600; margin: 32px 0 12px; }
+.richText p { margin-bottom: 20px; }
+.richText ul, .richText ol { padding-left: 24px; margin-bottom: 20px; }
+.richText li { margin-bottom: 8px; }
+.richText strong { font-weight: 700; }
+.cta {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(80px, 10vh, 120px) var(--margin);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.ctaContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.ctaText {
+  font-size: clamp(24px, 3vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.ctaBtn {
+  display: inline-block;
+  padding: 20px 48px;
+  font-size: var(--size-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.ctaBtn:hover { opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .outcomesGrid { grid-template-columns: repeat(2, 1fr); }
+  .outcome { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .ctaContainer { flex-direction: column; align-items: flex-start; }
+}

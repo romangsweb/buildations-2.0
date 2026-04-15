@@ -13,9 +13,9 @@ const SCENARIOS = [
     position: 18.4,
     gap: 'Ranking on page 2 with high commercial intent. Top results lack pricing context and real implementation detail.',
     competitors: [
-      { domain: 'gartner.com', title: 'Project Management Software: Complete Buyer Guide', gap: 'No pricing ranges, pure analyst framing' },
-      { domain: 'sap.com', title: 'How Much Does Project Management Software Cost?', gap: 'Marketing copy, no real user context' },
-      { domain: 'oracle.com', title: 'Project Management ROI Calculator', gap: 'Enterprise focus only, ignores SMB segment' },
+      { domain: 'forrester.com', title: 'Project Management Software: Complete Buyer Guide', gap: 'Generic analyst framing, no implementation specifics' },
+      { domain: 'hubspot.com', title: 'How Much Does Project Management Software Cost?', gap: 'Feature-focused copy, misses real buyer questions' },
+      { domain: 'salesforce.com', title: 'Project Management ROI Calculator', gap: 'Enterprise focus only, ignores SMB segment' },
     ],
     draft: {
       title: 'Project Management Software Cost in 2025: Real Ranges by Team Size',

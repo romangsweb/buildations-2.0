@@ -3,6 +3,7 @@ import { getCaseStudyBySlug } from '@/lib/payload'
 import styles from './CaseStudy.module.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import LatexRenderer from '@/components/LatexRenderer'
 
 export const dynamic = 'force-dynamic'
 
@@ -107,21 +108,21 @@ export default async function CaseStudyPage({ params }: Props) {
           {cs.problem && (
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>The Problem</h2>
-              <div className={styles.richText} dangerouslySetInnerHTML={{ __html: cs.problem }} />
+              <LatexRenderer content={cs.problem} />
             </div>
           )}
 
           {cs.implementation && (
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Implementation</h2>
-              <div className={styles.richText} dangerouslySetInnerHTML={{ __html: cs.implementation }} />
+              <LatexRenderer content={cs.implementation} />
             </div>
           )}
 
           {cs.results && (
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Results</h2>
-              <div className={styles.richText} dangerouslySetInnerHTML={{ __html: cs.results }} />
+              <LatexRenderer content={cs.results} />
             </div>
           )}
         </div>

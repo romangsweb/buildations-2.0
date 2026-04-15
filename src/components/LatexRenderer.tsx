@@ -18,11 +18,11 @@ function latexToHtml(text: string): string {
     .replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>')
     .replace(/\\underline\{([^}]+)\}/g, '<u>$1</u>')
     .replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, function(_, items) {
-      const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s) { return '<li>' + s.trim() + '</li>' }).join('')
+      const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s: string) { return '<li>' + s.trim() + '</li>' }).join('')
       return '<ul>' + lis + '</ul>'
     })
     .replace(/\\begin\{enumerate\}([\s\S]*?)\\end\{enumerate\}/g, function(_, items) {
-      const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s) { return '<li>' + s.trim() + '</li>' }).join('')
+      const lis = items.replace(/\\item\s*/g, '\x01').split('\x01').filter(Boolean).map(function(s: string) { return '<li>' + s.trim() + '</li>' }).join('')
       return '<ol>' + lis + '</ol>'
     })
     .replace(/\\section\{([^}]+)\}/g, '<h2>$1</h2>')

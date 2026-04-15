@@ -1,0 +1,119 @@
+.section {
+  background: var(--white);
+  color: var(--black);
+  padding: clamp(80px, 12vh, 160px) var(--margin);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  margin-bottom: 80px;
+}
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: clamp(36px, 6vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.subtitle {
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  opacity: 0.6;
+  max-width: 40ch;
+}
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.diagram {
+  position: sticky;
+  top: 100px;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 24px;
+}
+.layer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 24px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 0 6px 6px 0;
+  transition: background 0.2s;
+}
+.layer:hover {
+  background: rgba(0,0,0,0.06);
+}
+.layerShared {
+  background: rgba(0,0,0,0.02);
+  margin-top: 12px;
+}
+.layerLabel {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.layerSub {
+  font-size: 12px;
+  opacity: 0.4;
+  font-family: var(--font-mono);
+}
+.diagramNote {
+  font-size: 12px;
+  opacity: 0.35;
+  line-height: 1.5;
+  padding-left: 4px;
+}
+.principles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.principle {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 24px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  align-items: start;
+}
+.principleNum {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.25;
+  letter-spacing: 0.08em;
+  padding-top: 4px;
+}
+.principleContent {}
+.principleTitle {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.principleText {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  opacity: 0.65;
+}
+
+@media (max-width: 900px) {
+  .body { grid-template-columns: 1fr; gap: 48px; }
+  .diagram { position: static; }
+}

@@ -18,6 +18,7 @@ const ENGINE_LABEL: Record<string, string> = {
 export default async function ResearchPage() {
   const articles = await getArticles(50)
   const cases = await getCaseStudies(20)
+  console.log("[Research] cases count:", cases?.length, "first:", cases?.[0]?.title)
   return (
     <div className={styles.page}>
       <div className={styles.header}>

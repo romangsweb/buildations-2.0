@@ -10,12 +10,17 @@ export async function getArticles(limit = 10) {
 }
 
 export async function getArticleBySlug(slug: string) {
-  const res = await fetch(`${PAYLOAD_URL}/api/articles?where[slug][equals]=${slug}&where[status][equals]=published`, {
-    cache: 'no-store'
-  })
-  if (!res.ok) return null
-  const data = await res.json()
-  return data.docs[0] || null
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/articles?where[slug][equals]=${slug}&where[status][equals]=published`, {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.docs?.[0] || null
+  } catch {
+    return null
+  }
 }
 
 export async function getEngines() {

@@ -80,9 +80,16 @@ export default function LatexRenderer({ content }: Props) {
       document.head.appendChild(script)
     }
   }, [content])
+
+  // Process tables BEFORE converting to HTML paragraphs
+  const preprocessed = content
+    ? content.replace(/\\begin\{table\}[\s\S]*?\\end\{table\}/g, (match) => latexTableToHtml(match))
+            .replace(/\begin\{table\}[\s\S]*?\end\{table\}/g, (match) => latexTableToHtml(match))
+    : ''
+
   return (
     <div ref={ref} className={styles.latex}
-      dangerouslySetInnerHTML={{ __html: toHtml(content) }} />
+      dangerouslySetInnerHTML={{ __html: preprocessed ? toHtml(preprocessed) : '' }} />
   )
 }
 // Wed Apr 15 07:33:07 CST 2026

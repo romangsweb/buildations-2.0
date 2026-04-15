@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { getEngineBySlug } from '@/lib/payload'
 import styles from './EnginePage.module.css'
+import { getCaseStudiesByEngine } from '@/lib/payload'
+import Link from 'next/link'
 import SecuritySimulator from '@/components/SecuritySimulator'
 import RevenueSimulator from '@/components/RevenueSimulator'
 import SearchSimulator from '@/components/SearchSimulator'
@@ -120,6 +122,7 @@ export default async function EnginePage({ params }: Props) {
   const textColor = isDark ? 'var(--white)' : 'var(--black)'
   const order = String(engine.order || 1).padStart(2, '0')
   const data = ENGINE_DATA[engine.slug as keyof typeof ENGINE_DATA]
+  const cases = await getCaseStudiesByEngine(engine.slug, 3)
 
   return (
     <div className={styles.page}>
@@ -219,6 +222,27 @@ export default async function EnginePage({ params }: Props) {
               <p className={styles.solvesText}>{data.solves}</p>
             </div>
           </section>
+          {cases && cases.length > 0 && (
+            <section className={styles.casesEngineSection}>
+              <div className={styles.flowContainer}>
+                <p className={styles.sectionLabel}>Case Studies</p>
+                <div className={styles.casesEngineGrid}>
+                  {cases.map((cs: any) => (
+                    <Link key={cs.slug} href={'/research/cases/' + cs.slug} className={styles.caseEngineCard}>
+                      <p className={styles.caseEngineIndustry}>{cs.industry}</p>
+                      <h3 className={styles.caseEngineTitle}>{cs.title}</h3>
+                      <p className={styles.caseEngineSum}>{cs.summary?.substring(0, 80)}...</p>
+                      {cs.outcomes && cs.outcomes[0] && (
+                        <p className={styles.caseEngineMetric} style={{ color: bgColor }}>
+                          {cs.outcomes[0].value} — {cs.outcomes[0].metric}
+                        </p>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
           <section className={styles.ctaSection}>
             <div className={styles.ctaContainer}>
               <p className={styles.ctaText}>Work with this engine</p>

@@ -395,3 +395,56 @@
   background: #0a0a0a;
   padding: clamp(80px, 10vh, 140px) var(--margin);
 }
+
+.casesEngineSection {
+  background: var(--white);
+  color: var(--black);
+  padding: clamp(80px, 10vh, 120px) var(--margin);
+}
+.casesEngineGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.caseEngineCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  border: 1px solid rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: var(--black);
+  transition: border-color 0.2s, background 0.2s;
+}
+.caseEngineCard:hover {
+  background: rgba(0,0,0,0.02);
+  border-color: rgba(0,0,0,0.2);
+}
+.caseEngineIndustry {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+.caseEngineTitle {
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.caseEngineSum {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.5;
+  flex: 1;
+}
+.caseEngineMetric {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+@media (max-width: 900px) {
+  .casesEngineGrid { grid-template-columns: 1fr; }
+}

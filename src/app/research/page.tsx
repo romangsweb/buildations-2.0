@@ -66,7 +66,7 @@ export default async function ResearchPage() {
                   key={cs.slug}
                   href={`/research/cases/${cs.slug}`}
                   className={styles.caseCard}
-                  style={{ borderLeft: `4px solid ${color}` }}
+                  style={{ borderLeft: `4px solid ${color}`, '--card-color': color } as React.CSSProperties}
                 >
                   <div className={styles.caseEngine} style={{ color }}>
                     {ENGINE_LABEL[cs.engine]}

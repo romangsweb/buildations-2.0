@@ -1,6 +1,7 @@
 import { getArticleBySlug } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import styles from './Article.module.css'
 import RelatedArticles from '@/components/RelatedArticles'
 
@@ -9,6 +10,46 @@ export const dynamicParams = true
 
 export async function generateStaticParams() {
   return []
+}
+
+const BASE_URL = 'https://buildations.com'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params
+  const article = await getArticleBySlug(slug)
+  if (!article) return { title: 'Artículo no encontrado' }
+
+  return {
+    title: article.title,
+    description: article.excerpt || '',
+    alternates: { canonical: `${BASE_URL}/research/${slug}` },
+    openGraph: {
+      type: 'article',
+      url: `${BASE_URL}/research/${slug}`,
+      title: article.title,
+      description: article.excerpt || '',
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt,
+      authors: ['Buildations'],
+      tags: article.tags || [],
+      images: [
+        {
+          url: `/research/${slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt || '',
+      images: [`/research/${slug}/opengraph-image`],
+    },
+  }
 }
 
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'
@@ -74,8 +115,33 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     ? new Date(article.publishedAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })
     : ''
 
+  // Article JSON-LD schema
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt || '',
+    url: `${BASE_URL}/research/${slug}`,
+    datePublished: article.publishedAt || '',
+    dateModified: article.updatedAt || article.publishedAt || '',
+    author: { '@type': 'Organization', name: 'Buildations', url: BASE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Buildations',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon.svg` },
+    },
+    image: coverUrl || `${BASE_URL}/og-default.png`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/research/${slug}` },
+    ...(article.category && { articleSection: article.category }),
+    ...(article.tags?.length && { keywords: article.tags.join(', ') }),
+  }
+
   return (
     <div className={styles.article}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className={styles.header}>
         <div className={styles.container}>
           <div className={styles.meta}>

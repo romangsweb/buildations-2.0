@@ -7,17 +7,93 @@ import RevealInit from '@/components/RevealInit';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 
+const BASE_URL = 'https://buildations.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: {
     default: 'Buildations — AI Research & Intelligence',
     template: '%s — Buildations',
   },
-  description: 'Research, inteligencia artificial y exploración creativa. Ensayos, herramientas y síntesis generadas con IA y validadas por criterio humano.',
+  description: 'Laboratorio editorial de inteligencia artificial. Research, motores de IA en producción y exploración creativa desde Ciudad de México.',
+  keywords: ['inteligencia artificial', 'AI research', 'laboratorio IA', 'motores IA', 'RAG', 'LLM', 'Buildations', 'CDMX'],
+  authors: [{ name: 'Buildations', url: BASE_URL }],
+  creator: 'Buildations',
+  publisher: 'Buildations',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
   openGraph: {
-    siteName: 'Buildations',
     type: 'website',
+    locale: 'es_MX',
+    url: BASE_URL,
+    siteName: 'Buildations',
+    title: 'Buildations — AI Research & Intelligence',
+    description: 'Laboratorio editorial de inteligencia artificial. Research, motores de IA en producción y exploración creativa desde Ciudad de México.',
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'Buildations — AI Research Laboratory',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@buildations',
+    creator: '@buildations',
+    title: 'Buildations — AI Research & Intelligence',
+    description: 'Laboratorio editorial de inteligencia artificial desde Ciudad de México.',
+    images: ['/og-default.png'],
+  },
+  alternates: {
+    canonical: BASE_URL,
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
 };
+
+// Organization JSON-LD schema
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Buildations',
+  url: BASE_URL,
+  logo: `${BASE_URL}/icon.svg`,
+  description: 'Laboratorio editorial de inteligencia artificial. Diseñamos, construimos y documentamos motores de IA en producción.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ciudad de México',
+    addressCountry: 'MX',
+  },
+  sameAs: [
+    'https://github.com/romangsweb',
+  ],
+}
+
+// Website JSON-LD schema (enables sitelinks search box in Google)
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Buildations',
+  url: BASE_URL,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${BASE_URL}/research?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+}
 
 export default function RootLayout({
   children,
@@ -31,6 +107,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+
+        {/* Structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body>
         <Navbar />

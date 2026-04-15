@@ -1,0 +1,213 @@
+/* ============================================================
+   BUILDATIONS — /lexicon/[term]
+   Individual term page — white, typography focused
+   ============================================================ */
+
+.page {
+  background: var(--white);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+/* ─── Header ─── */
+.header {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(100px, 18vh, 180px) var(--margin) clamp(64px, 8vh, 100px);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Breadcrumb ─── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back:hover { color: rgba(255, 255, 255, 0.9); }
+
+.breadcrumbSep { color: rgba(255,255,255,0.15); font-size: 14px; }
+
+.breadcrumbLetter {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── Engine badge ─── */
+.engineBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+/* ─── Title ─── */
+.title {
+  font-size: clamp(40px, 8vw, 100px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin-bottom: 28px;
+}
+
+/* ─── Tags ─── */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  opacity: 0.5;
+}
+
+/* ─── Definition body ─── */
+.body {
+  padding: clamp(72px, 10vh, 120px) var(--margin);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.definition {
+  font-size: clamp(20px, 2.5vw, 30px);
+  line-height: 1.65;
+  font-weight: 300;
+  color: rgba(0,0,0,0.75);
+  max-width: 66ch;
+}
+
+/* ─── Related ─── */
+.related {
+  padding: clamp(56px, 7vh, 96px) var(--margin);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.relatedLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.3;
+  margin-bottom: 24px;
+}
+
+.relatedList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.relatedRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: var(--black);
+  transition: opacity 0.2s;
+}
+.relatedRow:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
+.relatedRow:hover { opacity: 0.6; }
+
+.relatedLetter {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.15);
+  min-width: 20px;
+}
+
+.relatedName {
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.relatedArrow {
+  font-size: 16px;
+  opacity: 0.2;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.relatedRow:hover .relatedArrow {
+  opacity: 0.6;
+  transform: translateX(4px);
+}
+
+/* ─── Pagination ─── */
+.pagination {
+  padding: clamp(48px, 6vh, 80px) var(--margin);
+}
+
+.pagination .container {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.paginationLink {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--black);
+  transition: opacity 0.2s;
+  max-width: 40%;
+}
+.paginationLink:hover { opacity: 0.6; }
+
+.paginationRight { align-items: flex-end; text-align: right; }
+
+.paginationDir {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+.paginationTitle {
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .pagination .container { flex-direction: column; align-items: stretch; }
+  .paginationLink { max-width: 100%; }
+  .paginationRight { align-items: flex-start; text-align: left; }
+}

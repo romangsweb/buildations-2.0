@@ -3,7 +3,8 @@ import Hero from '@/components/home/Hero';
 import IntroBlock from '@/components/home/IntroBlock';
 import LatestResearch from '@/components/home/LatestResearch';
 import FeaturedEngines from '@/components/home/FeaturedEngines'
-import HowItWorks from '@/components/home/HowItWorks';
+import HowItWorks from '@/components/home/HowItWorks'
+import ArchitectureDiagram from '@/components/home/ArchitectureDiagram';
 
 export const metadata: Metadata = {
   title: 'Buildations — AI Research & Intelligence',
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Hero />
       <IntroBlock />
       <HowItWorks />
+      <ArchitectureDiagram />
       <FeaturedEngines />
       <LatestResearch />
     </>

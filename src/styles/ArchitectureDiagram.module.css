@@ -1,0 +1,231 @@
+.section {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(80px, 12vh, 160px) var(--margin);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  margin-bottom: 64px;
+}
+.label {
+  font-size: var(--size-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.sub {
+  font-size: var(--size-body);
+  opacity: 0.4;
+}
+.diagram {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 2px;
+  background: rgba(255,255,255,0.06);
+}
+.colLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.3;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.enginesCol {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+}
+.engineBlock {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--white);
+  text-align: left;
+  transition: background 0.2s;
+  position: relative;
+}
+.engineBlock::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--engine-color);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.engineBlock:hover { background: rgba(255,255,255,0.04); }
+.engineActive { background: rgba(255,255,255,0.06) !important; }
+.engineActive::before { opacity: 1; }
+.engineDim { opacity: 0.3; }
+.engineNum {
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.3;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+.engineLabel {
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+.engineArrow {
+  font-size: 12px;
+  opacity: 0.3;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.engineActive .engineArrow {
+  opacity: 1;
+  transform: translateX(4px);
+  color: var(--engine-color);
+}
+.centerCol {
+  background: #0d0d0d;
+  min-height: 320px;
+  display: flex;
+  align-items: stretch;
+}
+.detail {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.detailHeader {
+  border-left: 3px solid;
+  padding-left: 16px;
+}
+.detailNum {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.3;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.detailTitle {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.detailDesc {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+.detailFlow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.flowCol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.flowColLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.3;
+  margin-bottom: 4px;
+}
+.flowTag {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+.flowArrow {
+  font-size: 20px;
+  padding-top: 28px;
+  flex-shrink: 0;
+  font-weight: 300;
+}
+.placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0.3;
+}
+.placeholderGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.placeholderDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+.placeholderText {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.infraCol {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+}
+.infraBlock {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 0.2s;
+  flex: 1;
+}
+.infraActive {
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid var(--engine-color);
+}
+.infraLabel {
+  font-size: 14px;
+  font-weight: 600;
+}
+.infraSub {
+  font-size: 11px;
+  opacity: 0.4;
+  font-family: var(--font-mono, monospace);
+}
+
+@media (max-width: 900px) {
+  .diagram { grid-template-columns: 1fr; }
+  .centerCol { min-height: 200px; }
+}

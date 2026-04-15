@@ -1,0 +1,275 @@
+/* ============================================================
+   BUILDATIONS — /lexicon
+   Editorial AI glossary — white background, high contrast
+   ============================================================ */
+
+.page {
+  background: var(--white);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+/* ─── Header ─── */
+.header {
+  padding: clamp(120px, 22vh, 220px) var(--margin) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: clamp(60px, 8vh, 100px);
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: clamp(48px, 10vw, 140px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.6;
+  max-width: 40ch;
+  opacity: 0.55;
+  margin-bottom: 24px;
+}
+
+.count {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.25;
+}
+
+/* ─── Letter nav ─── */
+.letterNav {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.letterLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+.letterLink:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ─── Body ─── */
+.body {
+  padding: 0 var(--margin);
+}
+
+.bodyInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Letter group ─── */
+.group {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 clamp(40px, 6vw, 80px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: clamp(48px, 6vh, 80px) 0;
+}
+
+.groupLetter {
+  font-size: clamp(80px, 10vw, 140px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--black);
+  opacity: 0.06;
+  user-select: none;
+  padding-top: 8px;
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+.termsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Term ─── */
+.term {
+  position: relative;
+  padding: clamp(32px, 4vh, 56px) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+.term:last-child { border-bottom: none; }
+
+/* Hover accent line */
+.term::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--black);
+  transition: width 0.4s var(--ease-out);
+}
+.term:hover::before { width: 3px; }
+
+.termHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.termName {
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.termMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.engineTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 100px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  opacity: 0.5;
+}
+
+.definition {
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.7;
+  max-width: 70ch;
+  opacity: 0.75;
+}
+
+.termIdx {
+  position: absolute;
+  bottom: clamp(16px, 3vh, 32px);
+  right: 0;
+  font-size: clamp(60px, 8vw, 100px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--black);
+  opacity: 0.03;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  transition: opacity 0.3s;
+}
+.term:hover .termIdx { opacity: 0.07; }
+
+/* ─── Footer CTA ─── */
+.cta {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(60px, 8vh, 100px) var(--margin);
+}
+
+.ctaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ctaLabel {
+  font-size: clamp(20px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  opacity: 0.5;
+}
+
+.ctaLink {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: border-color 0.2s;
+}
+.ctaLink:hover { border-color: var(--white); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .group {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .groupLetter {
+    font-size: 48px;
+    opacity: 0.08;
+    position: static;
+    margin-bottom: -16px;
+  }
+  .term::before { left: -var(--margin); }
+  .termHeader { flex-direction: column; gap: 12px; }
+  .termMeta { flex-direction: row; }
+}
+
+@media (max-width: 480px) {
+  .letterNav { gap: 0; }
+  .letterLink { width: 32px; height: 32px; font-size: 11px; }
+}

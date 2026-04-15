@@ -1,0 +1,272 @@
+/* ============================================================
+   BUILDATIONS — /stack
+   Technical infrastructure page — dark theme
+   ============================================================ */
+
+.page {
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+}
+
+/* ─── Header ─── */
+.header {
+  padding: clamp(120px, 22vh, 220px) var(--margin) clamp(60px, 8vh, 100px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: clamp(56px, 12vw, 160px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.5;
+  opacity: 0.5;
+  max-width: 36ch;
+}
+
+/* ─── Architecture Diagram section ─── */
+.diagramSection {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─── Philosophy ─── */
+.philosophy {
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.philosophyInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+}
+
+.philItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.philNum {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0.3;
+}
+
+.philTitle {
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.philBody {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.7;
+  opacity: 0.55;
+  max-width: 30ch;
+}
+
+/* ─── Tools ─── */
+.tools {
+  padding: clamp(80px, 10vh, 140px) var(--margin);
+}
+
+.toolsInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.toolsHeader {
+  margin-bottom: clamp(48px, 6vh, 80px);
+}
+
+.toolsLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.toolsTitle {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.toolsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Tool Card ─── */
+.toolCard {
+  background: var(--black);
+  padding: clamp(32px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.toolCard:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Top accent line on hover */
+.toolCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--tool-color, #ffffff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.toolCard:hover::after { transform: scaleX(1); }
+
+.toolTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.toolGlyph {
+  line-height: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.toolCard:hover .toolGlyph { opacity: 1; }
+
+.toolNum {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.toolCategory {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tool-color, rgba(255,255,255,0.4));
+  opacity: 0.7;
+}
+
+.toolName {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.toolDesc {
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.7;
+  opacity: 0.55;
+  flex: 1;
+}
+
+.toolRole {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.4;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.toolRoleLabel {
+  font-weight: 600;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ─── CTA ─── */
+.cta {
+  background: var(--blue);
+  color: var(--white);
+  padding: clamp(80px, 12vh, 140px) var(--margin);
+}
+
+.ctaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.ctaTitle {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: var(--white);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.ctaBtn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .philosophyInner { grid-template-columns: 1fr; gap: 40px; }
+  .toolsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .toolsGrid { grid-template-columns: 1fr; }
+  .ctaInner { flex-direction: column; align-items: flex-start; }
+}

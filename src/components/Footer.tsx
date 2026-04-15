@@ -38,11 +38,18 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
           </div>
           <div className={styles.navCol}>
+            <p className={styles.navLabel}>Lab</p>
+            <Link href="/lexicon">Lexicon</Link>
+            <Link href="/stack">Stack</Link>
+            <Link href="/field-notes">Field Notes</Link>
+            <Link href="/colophon">Colophon</Link>
+          </div>
+          <div className={styles.navCol}>
             <p className={styles.navLabel}>Stack</p>
-            <span className={styles.stackItem}>Ollama · Local LLMs</span>
-            <span className={styles.stackItem}>Qdrant · Vector store</span>
-            <span className={styles.stackItem}>PostgreSQL · Data layer</span>
-            <span className={styles.stackItem}>n8n · Orchestration</span>
+            <Link href="/stack#ollama">Ollama · Local LLMs</Link>
+            <Link href="/stack#qdrant">Qdrant · Vector store</Link>
+            <Link href="/stack#postgresql">PostgreSQL · Data layer</Link>
+            <Link href="/stack#n8n">n8n · Orchestration</Link>
           </div>
         </div>
       </div>

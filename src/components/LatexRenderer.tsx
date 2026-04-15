@@ -14,7 +14,6 @@ export default function LatexRenderer({ content }: Props) {
 
     const renderLatex = async () => {
       const katex = (await import('katex')).default
-      await import('katex/dist/katex.min.css')
 
       if (!ref.current) return
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import '@/styles/globals.css';
+import '@/styles/globals.css'
+import 'katex/dist/katex.min.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RevealInit from '@/components/RevealInit';

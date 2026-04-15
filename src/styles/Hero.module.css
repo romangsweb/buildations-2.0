@@ -167,3 +167,38 @@
   .decNumber { display: none; }
   .sub { font-size: 18px; }
 }
+
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.ctaPrimary {
+  display: inline-block;
+  padding: 16px 32px;
+  background: var(--white);
+  color: var(--black);
+  font-size: var(--size-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.ctaPrimary:hover { opacity: 0.85; }
+.ctaSecondary {
+  display: inline-block;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--white);
+  font-size: var(--size-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: border-color 0.2s;
+}
+.ctaSecondary:hover { border-color: rgba(255,255,255,0.7); }

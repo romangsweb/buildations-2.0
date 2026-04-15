@@ -49,6 +49,10 @@ export default function HeroClient({ images }: { images: string[] }) {
           Investigación artificial.<br />
           Síntesis editorial.
         </p>
+        <div className={styles.ctas}>
+          <a href="/engines" className={styles.ctaPrimary}>Explore engines →</a>
+          <a href="/contact" className={styles.ctaSecondary}>Work with us</a>
+        </div>
       </div>
       <div className={styles.scrollCue} aria-hidden="true">
         <span className={styles.scrollLine} />

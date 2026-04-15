@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getArticles, getCaseStudies } from '@/lib/payload'
 import styles from './Research.module.css'
+import { CategoryIcon } from '@/components/Icons'
 
 const COLORS = ['#0A0A0A', '#1A3BFF', '#2EFF6E', '#F5E642', '#FF2E2E']
 
@@ -46,7 +47,14 @@ export default async function ResearchPage({ searchParams }: { searchParams: Pro
           >
             <div className={styles.cardInner}>
               <div className={styles.meta}>
+                {article.category && (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <CategoryIcon category={article.category} size={13} color="currentColor" strokeWidth={1.2}/>
+                    {article.category}
+                  </span>
+                )}
                 <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
+                {article.readTime && <span>{article.readTime}</span>}
               </div>
               <h2 className={styles.cardTitle}>{article.title}</h2>
               {article.excerpt && (

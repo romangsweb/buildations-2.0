@@ -1,6 +1,8 @@
 import { getArticleBySlug } from '@/lib/payload'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import styles from './Article.module.css'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -68,12 +70,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       : `${PAYLOAD_URL}${article.coverImage.url}`
     : null
 
+  const dateStr = article.publishedAt
+    ? new Date(article.publishedAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })
+    : ''
+
   return (
     <div className={styles.article}>
       <div className={styles.header}>
         <div className={styles.container}>
           <div className={styles.meta}>
-            <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
+            <Link href="/research" className={styles.backLink}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M10 7H4M6 4L3 7l3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Research
+            </Link>
+            {article.category && <span className={styles.metaCategory}>{article.category}</span>}
+            {dateStr && <span>{dateStr}</span>}
+            {article.readTime && <span>{article.readTime} read</span>}
           </div>
           <h1 className={styles.title}>{article.title}</h1>
           {article.excerpt && <p className={styles.excerpt}>{article.excerpt}</p>}
@@ -87,6 +101,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {renderContent(article.content)}
         </div>
       </div>
+      <RelatedArticles
+        currentSlug={article.slug}
+        category={article.category}
+        readTime={article.readTime}
+      />
     </div>
   )
 }

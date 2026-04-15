@@ -165,7 +165,10 @@
 
 @media (max-width: 768px) {
   .decNumber { display: none; }
-  .sub { font-size: 18px; }
+  .sub { font-size: 17px; margin-top: 20px; }
+  .hero { padding: 0 var(--margin); padding-top: 56px; }
+  .scrollCue { display: none; }
+  .label { margin-bottom: 20px; font-size: 10px; }
 }
 
 .ctas {
@@ -185,9 +188,9 @@
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
-.ctaPrimary:hover { opacity: 0.85; }
+.ctaPrimary:hover { opacity: 0.85; transform: translateY(-2px); }
 .ctaSecondary {
   display: inline-block;
   padding: 16px 32px;
@@ -199,6 +202,11 @@
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.3);
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.ctaSecondary:hover { border-color: rgba(255,255,255,0.7); }
+.ctaSecondary:hover { border-color: rgba(255,255,255,0.7); transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+  .ctas { flex-direction: column; gap: 12px; }
+  .ctaPrimary, .ctaSecondary { width: 100%; text-align: center; padding: 18px 24px; }
+}

@@ -19,10 +19,17 @@
   gap: 20px;
 }
 .wordmark {
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+.wordmarkGlyph {
+  opacity: 0.5;
+  flex-shrink: 0;
 }
 .tagline {
   font-size: clamp(14px, 1.5vw, 18px);
@@ -73,7 +80,7 @@
 .stackItem {
   font-size: 12px;
   opacity: 0.35;
-  font-family: var(--font-mono);
+  font-family: 'Courier New', monospace;
   line-height: 1.6;
 }
 .bottom {
@@ -105,15 +112,24 @@
   letter-spacing: 0.05em;
 }
 .statusDot {
-  width: 6px;
-  height: 6px;
+  position: relative;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #2EFF6E;
-  animation: pulse 2s ease-in-out infinite;
 }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+.statusDot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid #2EFF6E;
+  animation: ring 2s ease-out infinite;
+  opacity: 0;
+}
+@keyframes ring {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
 
 @media (max-width: 900px) {

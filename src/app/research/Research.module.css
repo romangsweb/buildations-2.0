@@ -89,7 +89,9 @@
   position: relative;
   overflow: hidden;
   text-decoration: none;
+  transition: filter 0.3s;
 }
+.card:hover .decNumber { opacity: 0.12; }
 
 .cardInner {
   max-width: 900px;
@@ -163,7 +165,16 @@
 }
 
 @media (max-width: 768px) {
-  .meta { flex-direction: column; gap: 8px; }
+  .meta { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  .card { min-height: 60vh; }
+  .decNumber { display: none; }
+  .cardTitle { font-size: clamp(28px, 8vw, 56px); }
+  .excerpt { font-size: 16px; margin-bottom: 40px; }
+  .header { padding: clamp(80px, 15vh, 140px) var(--margin) 60px; }
+}
+
+@media (max-width: 480px) {
+  .card { min-height: 50vh; padding: 48px var(--margin); }
 }
 
 .casesSection {
@@ -258,6 +269,10 @@
 }
 
 @media (max-width: 900px) {
+  .casesList { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
   .casesList { grid-template-columns: 1fr; }
 }
 

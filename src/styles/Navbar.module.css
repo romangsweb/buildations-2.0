@@ -1,108 +1,340 @@
+/* ============================================================
+   BUILDATIONS — Navbar v2
+   Desktop: wordmark + indexed links + CTA pill
+   Mobile: fullscreen overlay with stagger animations
+   ============================================================ */
+
+/* ─── Base ─── */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 200;
   padding: 0 var(--margin);
-  height: 56px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.3s, backdrop-filter 0.3s;
+  gap: 16px;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
 }
 
 .navbar.scrolled {
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
+/* ─── Logo ─── */
 .logo {
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
   transition: opacity 0.2s;
+  flex-shrink: 0;
 }
+.logo:hover { opacity: 0.55; }
 
-.logo:hover { opacity: 0.6; }
+.logoGlyph {
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.logo:hover .logoGlyph { opacity: 1; }
 
-.nav {
+/* ─── Desktop Nav ─── */
+.desktopNav {
   display: flex;
-  gap: 40px;
+  gap: 32px;
   align-items: center;
+  flex: 1;
+  justify-content: center;
 }
 
 .navLink {
-  font-size: var(--size-label);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: var(--tracking-label);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
   position: relative;
   transition: opacity 0.2s;
+  white-space: nowrap;
 }
+
+.navIndex {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  opacity: 0.35;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.2s;
+}
+.navLink:hover .navIndex { opacity: 0.7; }
 
 .navLink::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -3px;
   left: 0;
   width: 0;
   height: 1px;
   background: currentColor;
-  transition: width 0.3s var(--ease-out);
+  transition: width 0.35s var(--ease-out);
 }
-
 .navLink:hover::after,
 .active::after { width: 100%; }
 
-.navLink:hover { opacity: 0.7; }
+.navLink:hover { opacity: 0.65; }
+.active { opacity: 1; }
 
+/* ─── Right Group: Search + CTA ─── */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── Desktop CTA ─── */
+.ctaPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--white);
+  text-decoration: none;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.ctaPill:hover { opacity: 0.82; transform: translateY(-1px); }
+
+/* ─── Menu Button (mobile only) ─── */
 .menuBtn {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: var(--white);
+  color: currentColor;
+  line-height: 0;
+  z-index: 300;
+  position: relative;
+  transition: opacity 0.2s;
 }
 
-@media (max-width: 640px) {
-  .nav { gap: 20px; }
-  .logo { font-size: 11px; }
-}
-
-@media (max-width: 480px) {
-  .nav {
-    display: none;
-    position: fixed;
-    inset: 56px 0 0 0;
-    background: rgba(10,10,10,0.97);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-  }
-  .nav.open { display: flex; }
-  .menuBtn { display: block; }
-  .navLink { font-size: 20px; letter-spacing: 0.1em; }
-}
-
+/* ─── Color Modes ─── */
 .navDark .logo,
 .navDark .navLink,
-.navDark .menuBtn { color: var(--white); }
+.navDark .menuBtn,
+.navDark .ctaPill svg { color: var(--white); }
+
+.navDark .ctaPill {
+  color: var(--black);
+  background: var(--white);
+}
 
 .navLight .logo,
 .navLight .navLink,
 .navLight .menuBtn { color: var(--black); }
 
-.navLight.scrolled {
-  background: rgba(245,245,240,0.9);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+.navLight .ctaPill {
+  color: var(--white);
+  background: var(--black);
 }
+
+.navLight.scrolled {
+  background: rgba(245, 245, 240, 0.92);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Mobile Overlay ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px var(--margin) 60px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  overflow: hidden;
+}
+
+.overlayOpen {
+  pointer-events: all;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Decorative large text */
+.overlayDecNum {
+  position: absolute;
+  bottom: -0.15em;
+  right: -0.05em;
+  font-size: clamp(100px, 22vw, 220px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--white);
+  opacity: 0.03;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Search area inside mobile overlay */
+.overlaySearch {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 8px;
+}
+.overlaySearchLabel {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.25;
+}
+
+/* Nav list */
+.overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.overlayLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  text-decoration: none;
+  color: var(--white);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.4s var(--ease-out) var(--delay, 0ms),
+    transform 0.4s var(--ease-out) var(--delay, 0ms),
+    color 0.2s;
+}
+
+.overlayOpen .overlayLink {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.overlayLink:hover { color: var(--yellow); }
+
+.overlayActive {
+  color: var(--yellow);
+}
+
+.overlayIndex {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  opacity: 0.3;
+  font-weight: 400;
+  min-width: 24px;
+}
+
+.overlayLabel {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  flex: 1;
+}
+
+.overlayIcon {
+  opacity: 0.25;
+  transition: opacity 0.2s;
+}
+.overlayLink:hover .overlayIcon { opacity: 0.8; }
+
+/* Footer of overlay */
+.overlayFooter {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease-out) 320ms, transform 0.4s var(--ease-out) 320ms;
+}
+.overlayOpen .overlayFooter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlayFooterText {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+.overlayCtaPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--white);
+  text-decoration: none;
+  border-radius: 100px;
+  transition: opacity 0.2s;
+}
+.overlayCtaPill:hover { opacity: 0.8; }
+
+/* ─── Responsive: only show hamburger on mobile ─── */
+@media (max-width: 768px) {
+  .desktopNav { display: none; }
+  .navRight { display: none; }
+  .menuBtn { display: block; }
+  .navbar { height: 56px; }
+}
+
+@media (min-width: 769px) {
+  .overlay { display: none; }
+}
+
+/* Compact nav on medium screens */
+@media (max-width: 1100px) and (min-width: 769px) {
+  .desktopNav { gap: 22px; }
+  .navRight { gap: 8px; }
+  .ctaPill { padding: 7px 14px; font-size: 10px; }
+}
+
+

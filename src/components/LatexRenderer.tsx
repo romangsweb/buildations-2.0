@@ -1,95 +1,101 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { BlockMath, InlineMath } from 'react-katex'
+import 'katex/dist/katex.min.css'
 import styles from './LatexRenderer.module.css'
 
 interface Props {
   content: string
 }
 
-declare global {
-  interface Window { katex: any }
-}
-
-function processLatexCommands(text: string): string {
-  return text
-    .replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>')
-    .replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>')
-    .replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>')
-    .replace(/\\underline\{([^}]+)\}/g, '<u>$1</u>')
-}
-
-function latexTableToHtml(tableContent: string): string {
-  try {
-    const rows = tableContent.split('\\\\').map((r: string) => r.trim()).filter((r: string) => r && !r.match(/^\\hline$/))
-    const html = rows.map((row: string, i: number) => {
-      const cleanRow = row.replace(/\\hline/g, '').trim()
-      if (!cleanRow) return ''
-      const cells = cleanRow.split('&').map((c: string) => processLatexCommands(c.trim()))
-      const tag = i === 0 ? 'th' : 'td'
-      return '<tr>' + cells.map((c: string) => '<' + tag + '>' + c + '</' + tag + '>').join('') + '</tr>'
-    }).filter(Boolean).join('')
-    return '<div class="latex-table-wrap"><table class="latex-table">' + html + '</table></div>'
-  } catch { return tableContent }
-}
-
-function processText(text: string, katex: any): string {
-  let result = text
-  result = result.replace(/\\begin\{equation\}([\s\S]+?)\\end\{equation\}/g, (_: string, math: string) => {
-    try { return '<div class="katex-block">' + katex.renderToString(math.trim(), { displayMode: true, throwOnError: false }) + '</div>' }
-    catch { return '<div class="katex-error">' + math + '</div>' }
-  })
-  result = result.replace(/\$\$([\s\S]+?)\$\$/g, (_: string, math: string) => {
-    try { return '<div class="katex-block">' + katex.renderToString(math.trim(), { displayMode: true, throwOnError: false }) + '</div>' }
-    catch { return '<div class="katex-error">' + math + '</div>' }
-  })
-  result = result.replace(/\$([^\$\n]+?)\$/g, (_: string, math: string) => {
-    try { return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false }) }
-    catch { return '<span class="katex-error">' + math + '</span>' }
-  })
-  result = processLatexCommands(result)
-  return result
-}
-
-function toHtml(text: string): string {
-  if (!text) return ''
-  return text.split('\n\n').map((para: string) => {
-    if (para.startsWith('## ')) return '<h2>' + para.replace(/^## /, '') + '</h2>'
-    if (para.startsWith('# ')) return '<h1>' + para.replace(/^# /, '') + '</h1>'
-    if (para.startsWith('- ') || para.startsWith('* ')) {
-      const items = para.split('\n').map((l: string) => '<li>' + l.replace(/^[-*] /, '') + '</li>').join('')
-      return '<ul>' + items + '</ul>'
-    }
-    return '<p>' + para + '</p>'
+function latexTableToHtml(match: string): string {
+  const tabularMatch = match.match(/\\begin\{tabular\}[^}]*\}([\s\S]*?)\\end\{tabular\}/)
+  if (!tabularMatch) return match
+  const tableContent = tabularMatch[1]
+  const rows = tableContent.split('\\\\').map(r => r.replace(/\\hline/g, '').trim()).filter(Boolean)
+  const html = rows.map((row, i) => {
+    const cells = row.split('&').map(c => c.trim()
+      .replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>')
+      .replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>')
+      .replace(/\\texttt\{([^}]+)\}/g, '<code>$1</code>')
+    )
+    const tag = i === 0 ? 'th' : 'td'
+    return `<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join('')}</tr>`
   }).join('')
+  return `<table class="latex-table">${html}</table>`
+}
+
+function renderSegment(text: string, key: number) {
+  // Table
+  if (text.includes('\\begin{table}')) {
+    return <div key={key} className="latex-table-wrap" dangerouslySetInnerHTML={{ __html: latexTableToHtml(text) }} />
+  }
+  // Block math
+  if (text.startsWith('$$') && text.endsWith('$$')) {
+    try { return <BlockMath key={key} math={text.slice(2, -2).trim()} /> }
+    catch { return <p key={key}>{text}</p> }
+  }
+  if (text.startsWith('\\begin{equation}')) {
+    const math = text.replace(/\\begin\{equation\}/, '').replace(/\\end\{equation\}/, '').trim()
+    try { return <BlockMath key={key} math={math} /> }
+    catch { return <p key={key}>{text}</p> }
+  }
+  // Inline with mixed content
+  const parts = text.split(/(\$[^\$\n]+?\$)/)
+  const rendered = parts.map((part, i) => {
+    if (part.startsWith('$') && part.endsWith('$')) {
+      try { return <InlineMath key={i} math={part.slice(1, -1)} /> }
+      catch { return <span key={i}>{part}</span> }
+    }
+    const html = part
+      .replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>')
+      .replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>')
+      .replace(/\\texttt\{([^}]+)\}/g, '<code>$1</code>')
+      .replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>')
+    return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />
+  })
+  return <span key={key}>{rendered}</span>
 }
 
 export default function LatexRenderer({ content }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    if (!ref.current || !content) return
-    const render = () => {
-      if (!ref.current) return
-      ref.current.innerHTML = processText(ref.current.innerHTML, window.katex)
-    }
-    if (window.katex) {
-      render()
-    } else {
-      const script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js'
-      script.onload = render
-      document.head.appendChild(script)
-    }
-  }, [content])
+  if (!content) return null
 
-  // Process tables BEFORE converting to HTML paragraphs
-  const preprocessed = content
-    ? content.replace(/\\begin\{table\}[\s\S]*?\\end\{table\}/g, (match) => latexTableToHtml(match))
-            .replace(/\begin\{table\}[\s\S]*?\end\{table\}/g, (match) => latexTableToHtml(match))
-    : ''
+  const segments: string[] = []
+  let remaining = content
 
-  return (
-    <div ref={ref} className={styles.latex}
-      dangerouslySetInnerHTML={{ __html: preprocessed ? toHtml(preprocessed) : '' }} />
-  )
+  // Extract tables first
+  remaining = remaining.replace(/(\\begin\{table\}[\s\S]*?\\end\{table\})/g, (match) => {
+    segments.push(match)
+    return `\x00TABLE${segments.length - 1}\x00`
+  })
+
+  // Extract block math
+  remaining = remaining.replace(/(\$\$[\s\S]+?\$\$)/g, (match) => {
+    segments.push(match)
+    return `\x00BLOCK${segments.length - 1}\x00`
+  })
+  remaining = remaining.replace(/(\\begin\{equation\}[\s\S]+?\\end\{equation\})/g, (match) => {
+    segments.push(match)
+    return `\x00BLOCK${segments.length - 1}\x00`
+  })
+
+  const paras = remaining.split('\n\n').map((para, i) => {
+    if (para.includes('\x00')) {
+      const parts = para.split(/(\x00(?:TABLE|BLOCK)\d+\x00)/)
+      return (
+        <div key={i}>
+          {parts.map((part, j) => {
+            const m = part.match(/\x00(?:TABLE|BLOCK)(\d+)\x00/)
+            if (m) return renderSegment(segments[parseInt(m[1])], j)
+            if (!part.trim()) return null
+            return renderSegment(part, j)
+          })}
+        </div>
+      )
+    }
+    if (para.startsWith('## ')) return <h2 key={i}>{para.replace(/^## /, '')}</h2>
+    if (para.startsWith('# ')) return <h1 key={i}>{para.replace(/^# /, '')}</h1>
+    return <p key={i}>{renderSegment(para, 0)}</p>
+  })
+
+  return <div className={styles.latex}>{paras}</div>
 }
-// Wed Apr 15 07:33:07 CST 2026

@@ -3,10 +3,10 @@ import { getCaseStudyBySlug } from '@/lib/payload'
 import styles from './CaseStudy.module.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-const LatexRenderer = dynamic(() => import('@/components/LatexRenderer'), { ssr: false })
+import nextDynamic from 'next/dynamic'
+const LatexRenderer = nextDynamic(() => import('@/components/LatexRenderer'), { ssr: false })
 
-export const dynamic = 'force-dynamic'
+export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
 

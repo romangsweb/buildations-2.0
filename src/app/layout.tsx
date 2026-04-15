@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css'
-import 'katex/dist/katex.min.css';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RevealInit from '@/components/RevealInit';
@@ -30,6 +30,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
       </head>
       <body>
         <Navbar />

@@ -122,7 +122,6 @@ export default async function FieldNotesPage() {
                     key={note.slug}
                     href={`/field-notes/${note.slug}`}
                     className={styles.noteRow}
-                    data-reveal
                   >
                     <div className={styles.noteDate}>
                       {note.publishedAt

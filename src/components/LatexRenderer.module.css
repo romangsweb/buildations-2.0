@@ -47,3 +47,37 @@
 .latex :global(.katex) {
   font-size: 1.1em;
 }
+
+.latex :global(.latex-table-wrap) {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+.latex :global(.latex-table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.latex :global(.latex-table th),
+.latex :global(.latex-table td) {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.1);
+  line-height: 1.4;
+}
+.latex :global(.latex-table th) {
+  background: rgba(0,0,0,0.04);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.latex :global(.latex-table tr:hover td) {
+  background: rgba(0,0,0,0.02);
+}
+.latex :global(.katex-block) {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: rgba(0,0,0,0.03);
+  border-left: 3px solid var(--black);
+  overflow-x: auto;
+}

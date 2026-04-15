@@ -59,10 +59,13 @@ function renderMath(html: string, katex: any): string {
 
 function processContent(text: string): string {
   if (!text) return ''
-  return text.split('\n\n').map(function(para: string) {
+  // Apply text transforms to raw content first
+  const preprocessed = latexToHtml(text)
+  return preprocessed.split('\n\n').map(function(para: string) {
+    if (para.startsWith('<h2>') || para.startsWith('<h3>') || para.startsWith('<ul>') || para.startsWith('<ol>') || para.startsWith('<div') || para.startsWith('<table')) return para
     if (para.startsWith('## ')) return '<h2>' + para.replace(/^## /, '') + '</h2>'
     if (para.startsWith('# ')) return '<h1>' + para.replace(/^# /, '') + '</h1>'
-    const transformed = latexToHtml(para)
+    const transformed = para
     if (transformed.startsWith('<h') || transformed.startsWith('<ul') ||
         transformed.startsWith('<ol') || transformed.startsWith('<div') ||
         transformed.startsWith('<table')) {

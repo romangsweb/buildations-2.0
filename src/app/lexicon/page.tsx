@@ -45,7 +45,7 @@ export default function LexiconPage() {
               <div className={styles.groupLetter} aria-hidden="true">{letter}</div>
               <div className={styles.termsList}>
                 {grouped[letter].map((term, i) => (
-                  <article key={term.id} className={styles.term} data-reveal>
+                  <article key={term.id} className={styles.term}>
                     <div className={styles.termHeader}>
                       <h2 className={styles.termName}>{term.term}</h2>
                       <div className={styles.termMeta}>

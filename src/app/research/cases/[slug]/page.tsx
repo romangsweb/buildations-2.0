@@ -3,7 +3,8 @@ import { getCaseStudyBySlug } from '@/lib/payload'
 import styles from './CaseStudy.module.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import LatexRenderer from '@/components/LatexRenderer'
+import dynamic from 'next/dynamic'
+const LatexRenderer = dynamic(() => import('@/components/LatexRenderer'), { ssr: false })
 
 export const dynamic = 'force-dynamic'
 

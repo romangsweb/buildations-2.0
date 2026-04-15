@@ -47,12 +47,16 @@ export async function getEngineBySlug(slug: string) {
 }
 
 export async function getCaseStudies(limit = 20) {
-  const res = await fetch(`${PAYLOAD_URL}/api/case-studies?limit=${limit}&where[status][equals]=published&sort=-createdAt`, {
-    cache: 'no-store'
-  })
-  if (!res.ok) return []
-  const data = await res.json()
-  return data.docs
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/case-studies?limit=${limit}&where[status][equals]=published&sort=-createdAt`, {
+      cache: 'no-store'
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.docs || []
+  } catch {
+    return []
+  }
 }
 
 export async function getCaseStudyBySlug(slug: string) {

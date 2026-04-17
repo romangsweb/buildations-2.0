@@ -81,3 +81,42 @@ export async function getCaseStudiesByEngine(engine: string, limit = 6) {
   const data = await res.json()
   return data.docs
 }
+
+export async function getFieldNotes(limit = 20) {
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/field-notes?limit=${limit}&where[status][equals]=published&sort=-publishedAt`, {
+      cache: 'no-store'
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.docs || []
+  } catch {
+    return []
+  }
+}
+
+export async function getFieldNoteBySlug(slug: string) {
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/field-notes?where[slug][equals]=${slug}&where[status][equals]=published`, {
+      cache: 'no-store'
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.docs?.[0] || null
+  } catch {
+    return null
+  }
+}
+
+export async function getLexiconTerms(limit = 100) {
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/lexicon-terms?limit=${limit}&where[status][equals]=published&sort=letter`, {
+      cache: 'no-store'
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.docs || []
+  } catch {
+    return []
+  }
+}

@@ -1,0 +1,31 @@
+# Buildations
+
+> AI research laboratory that builds its own engines from infrastructure up. Not demos. Not prototypes. Systems running in production.
+
+Buildations is a technical research lab based in Ciudad de México. It designs, builds, and operates three production AI engines on self-hosted infrastructure — no cloud dependencies for core operations.
+
+## Engines
+
+- [Adaptive Security Engine](/engines/adaptive-security): Autonomous threat detection and response. Correlates 9 monitoring sources, reasons via LangGraph agent, executes bans without human intervention. 1.4M+ attack events processed.
+- [Revenue Intelligence Engine](/engines/revenue-intelligence): ML-based deal scoring across 12 signals. ICP tier classification, buying role detection, pipeline velocity. Scores push to HubSpot daily.
+- [Search & Presence Engine](/engines/search-presence): Dual-layer content engine. Reads 367K GSC rows daily, generates via writer+auditor LLM loop, monitors AI citation presence across 10 strategic queries.
+
+## Research
+
+- [Research](/research): Technical articles on AI infrastructure, security, and revenue operations. Generated via local LLMs, human-validated before publishing.
+- [Field Notes](/field-notes): Short observations from the lab. Patterns, discoveries, and reflections on running AI in production.
+- [Lexicon](/lexicon): AI terms defined with editorial voice. Not Wikipedia — production context and critical perspective.
+
+## Stack
+
+Self-hosted on Ubuntu 24.04 with RTX 5060 Ti 16GB. Core stack: Ollama (gemma3:12b, llama3.2:3b, deepseek-r1:14b), Qdrant, PostgreSQL, n8n, LangGraph, ComfyUI, Tetragon eBPF, Suricata, Cowrie, Beelzebub.
+
+## About
+
+- [About](/about): Origin story, architecture philosophy, and who this infrastructure is for.
+- [Contact](/contact): Work with the engines.
+
+## Optional
+
+- [Stack](/stack): Full technical stack documentation.
+- [Colophon](/colophon): How the site was built.

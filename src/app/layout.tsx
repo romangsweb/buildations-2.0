@@ -10,6 +10,19 @@ import ScrollProgress from '@/components/ScrollProgress';
 
 const BASE_URL = 'https://buildations.com'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Buildations',
+  url: 'https://buildations.com',
+  description: 'AI research laboratory that builds its own engines from infrastructure up.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Buildations',
+    url: 'https://buildations.com',
+  },
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
@@ -104,6 +117,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />

@@ -1,20 +1,23 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { lexiconTerms } from '@/lib/lexicon'
+import { getLexiconTerms } from '@/lib/payload'
+import { lexiconTerms as MOCK_TERMS } from '@/lib/lexicon'
 import styles from './Term.module.css'
 
 const BASE_URL = 'https://buildations.com'
 
 export async function generateStaticParams() {
-  return lexiconTerms.map(term => ({ term: term.id }))
+  return MOCK_TERMS.map(term => ({ term: term.id }))
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ term: string }> }
 ): Promise<Metadata> {
   const { term: termId } = await params
-  const term = lexiconTerms.find(t => t.id === termId)
+  const cmsTerms = await getLexiconTerms(200)
+  const allTerms = cmsTerms.length > 0 ? cmsTerms : MOCK_TERMS
+  const term = allTerms.find((t: any) => t.id === termId || t.slug === termId)
   if (!term) return { title: 'Término no encontrado' }
 
   return {

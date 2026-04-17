@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getArticles } from '@/lib/payload'
+import { getFieldNotes } from '@/lib/payload'
 import styles from './FieldNotes.module.css'
 import { IconSignal } from '@/components/Icons'
 
@@ -73,10 +73,7 @@ export default async function FieldNotesPage() {
   // Try to get field-notes from CMS, fallback to mock
   let notes: any[] = []
   try {
-    const all = await getArticles(50)
-    const cms = all.filter((a: any) =>
-      a.category === 'field-note' || a.type === 'field-note' || a.tags?.includes('field-note')
-    )
+    const cms = await getFieldNotes(50)
     notes = cms.length > 0 ? cms : MOCK_NOTES
   } catch {
     notes = MOCK_NOTES

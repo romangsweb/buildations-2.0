@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { lexiconTerms, letters } from '@/lib/lexicon'
+import { getLexiconTerms } from '@/lib/payload'
+import { lexiconTerms as MOCK_TERMS, letters as MOCK_LETTERS } from '@/lib/lexicon'
 import styles from './Lexicon.module.css'
 
 export const metadata: Metadata = {
@@ -7,9 +8,12 @@ export const metadata: Metadata = {
   description: 'Términos de inteligencia artificial definidos con criterio editorial. No Wikipedia — el vocabulario de Buildations para describir cómo funciona la IA en producción.',
 }
 
-export default function LexiconPage() {
-  const grouped = letters.reduce<Record<string, typeof lexiconTerms>>((acc, letter) => {
-    acc[letter] = lexiconTerms.filter(t => t.letter === letter)
+export default async function LexiconPage() {
+  const cmsTerms = await getLexiconTerms(200)
+  const terms = cmsTerms.length > 0 ? cmsTerms : MOCK_TERMS
+  const letters = [...new Set(terms.map((t: any) => t.letter))].sort() as string[]
+  const grouped = letters.reduce<Record<string, any[]>>((acc, letter) => {
+    acc[letter] = terms.filter((t: any) => t.letter === letter)
     return acc
   }, {})
 
@@ -24,7 +28,7 @@ export default function LexiconPage() {
             Términos de IA definidos en voz propia.<br />
             No Wikipedia. Criterio editorial y contexto de producción.
           </p>
-          <p className={styles.count}>{lexiconTerms.length} términos</p>
+          <p className={styles.count}>{terms.length} términos</p>
         </div>
 
         {/* Letter nav */}

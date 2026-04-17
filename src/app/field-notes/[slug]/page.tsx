@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import styles from './FieldNote.module.css'
+import { getFieldNoteBySlug } from '@/lib/payload'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -111,7 +112,10 @@ Usa agentes cuando el espacio de soluciones es genuinamente abierto. Usa pipelin
 
 export default async function FieldNotePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const note = MOCK_NOTES.find(n => n.slug === slug)
+  let note: any = await getFieldNoteBySlug(slug)
+  if (!note) {
+    note = MOCK_NOTES.find((n: any) => n.slug === slug)
+  }
   if (!note) notFound()
 
   const dateStr = new Date(note.publishedAt).toLocaleDateString('es-MX', {

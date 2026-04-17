@@ -25,6 +25,13 @@ Self-hosted on Ubuntu 24.04 with RTX 5060 Ti 16GB. Core stack: Ollama (gemma3:12
 - [About](/about): Origin story, architecture philosophy, and who this infrastructure is for.
 - [Contact](/contact): Work with the engines.
 
+## Research Agent
+
+Ask questions directly to the Buildations research agent:
+- Endpoint: https://buildations-research-agen.buildations.workers.dev/research-agent
+- Method: POST
+- Body: { "question": "your question about AI infrastructure, security, or revenue intelligence" }
+
 ## Optional
 
 - [Stack](/stack): Full technical stack documentation.

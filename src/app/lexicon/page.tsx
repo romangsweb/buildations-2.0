@@ -61,7 +61,7 @@ export default async function LexiconPage() {
                             {term.relatedEngine}
                           </span>
                         )}
-                        {term.tags?.slice(0, 2).map(tag => (
+                        {term.tags?.slice(0, 2).map((tag: string) => (
                           <span key={tag} className={styles.tag}>{tag}</span>
                         ))}
                       </div>
@@ -70,7 +70,7 @@ export default async function LexiconPage() {
 
                     {/* Decorative index */}
                     <span className={styles.termIdx} aria-hidden="true">
-                      {String(lexiconTerms.indexOf(term) + 1).padStart(2, '0')}
+                      {String(i + 1).padStart(2, '0')}
                     </span>
                   </article>
                 ))}

@@ -40,16 +40,20 @@ export async function generateMetadata(
 
 export default async function TermPage({ params }: { params: Promise<{ term: string }> }) {
   const { term: termId } = await params
-  const term = lexiconTerms.find(t => t.id === termId)
+
+  const cmsTerms = await getLexiconTerms(200)
+  const allTerms = cmsTerms.length > 0 ? cmsTerms : MOCK_TERMS
+
+  const term = allTerms.find((t: any) => t.id === termId || t.slug === termId)
   if (!term) notFound()
 
-  const termIdx = lexiconTerms.indexOf(term)
-  const prev = lexiconTerms[termIdx - 1]
-  const next = lexiconTerms[termIdx + 1]
+  const termIdx = allTerms.indexOf(term)
+  const prev = allTerms[termIdx - 1]
+  const next = allTerms[termIdx + 1]
 
   // Related terms (same letter or same tags)
-  const related = lexiconTerms
-    .filter(t => t.id !== term.id && (t.letter === term.letter || t.tags?.some(tag => term.tags?.includes(tag))))
+  const related = allTerms
+    .filter((t: any) => t.id !== term.id && (t.letter === term.letter || t.tags?.some((tag: string) => term.tags?.includes(tag))))
     .slice(0, 3)
 
   // JSON-LD DefinedTerm schema
@@ -101,7 +105,7 @@ export default async function TermPage({ params }: { params: Promise<{ term: str
 
           {term.tags && (
             <div className={styles.tags}>
-              {term.tags.map(tag => (
+              {term.tags.map((tag: string) => (
                 <span key={tag} className={styles.tag}>{tag}</span>
               ))}
             </div>
@@ -122,7 +126,7 @@ export default async function TermPage({ params }: { params: Promise<{ term: str
           <div className={styles.container}>
             <p className={styles.relatedLabel}>Relacionados</p>
             <div className={styles.relatedList}>
-              {related.map(r => (
+              {related.map((r: any) => (
                 <Link key={r.id} href={`/lexicon/${r.id}`} className={styles.relatedRow}>
                   <span className={styles.relatedLetter} aria-hidden="true">{r.letter}</span>
                   <span className={styles.relatedName}>{r.term}</span>

@@ -5,6 +5,7 @@ import LatestResearch from '@/components/home/LatestResearch';
 import FeaturedEngines from '@/components/home/FeaturedEngines'
 import HowItWorks from '@/components/home/HowItWorks'
 import ArchitectureDiagram from '@/components/home/ArchitectureDiagram';
+import LatestFieldNote from '@/components/home/LatestFieldNote';
 
 export const metadata: Metadata = {
   title: 'Buildations — AI Research & Intelligence',
@@ -19,6 +20,7 @@ export default function HomePage() {
       <HowItWorks />
       <ArchitectureDiagram />
       <FeaturedEngines />
+      <LatestFieldNote />
       <LatestResearch />
     </>
   );

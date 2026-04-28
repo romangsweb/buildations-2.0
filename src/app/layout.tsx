@@ -6,7 +6,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RevealInit from '@/components/RevealInit';
 import CustomCursor from '@/components/CustomCursor';
-import ScrollProgress from '@/components/ScrollProgress';
+import PageTransition from '@/components/PageTransition';
+import AnnouncementBar from '@/components/AnnouncementBar';
+import BackToTop from '@/components/BackToTop';
+import SkipToContent from '@/components/SkipToContent';
 
 const BASE_URL = 'https://buildations.com'
 
@@ -123,6 +126,12 @@ export default function RootLayout({
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload critical font weight */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+        />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 
@@ -151,11 +160,17 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Skip to main content — accessibility */}
+        <SkipToContent />
+
+        <AnnouncementBar />
         <Navbar />
         <RevealInit />
         <CustomCursor />
-        <ScrollProgress />
-        <main>{children}</main>
+        <BackToTop />
+        <PageTransition>
+          <main id="main-content">{children}</main>
+        </PageTransition>
         <Footer />
       </body>
     </html>

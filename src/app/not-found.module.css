@@ -1,0 +1,126 @@
+/* ============================================================
+   BUILDATIONS — /not-found (404)
+   ============================================================ */
+
+.page {
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px var(--margin) 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+}
+
+/* Huge background 404 */
+.decNumber {
+  position: absolute;
+  top: 50%;
+  right: -0.05em;
+  transform: translateY(-50%);
+  font-size: clamp(120px, 28vw, 400px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--white);
+  opacity: 0.04;
+  user-select: none;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: clamp(48px, 10vw, 130px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.text {
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.65;
+  opacity: 0.45;
+  margin-bottom: 56px;
+  max-width: 40ch;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.primaryLink {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--yellow);
+  text-decoration: none;
+  padding: 14px 28px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.primaryLink:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+.primaryLink:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+.secondaryLink {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.secondaryLink::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s var(--ease-out);
+}
+.secondaryLink:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+.secondaryLink:hover::after { width: 100%; }
+
+@media (max-width: 480px) {
+  .links { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .decNumber { display: none; }
+}

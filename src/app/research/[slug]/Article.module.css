@@ -68,6 +68,14 @@
   max-width: 45ch;
   opacity: 0.75;
   font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .coverImage {

@@ -1,3 +1,8 @@
+/* ============================================================
+   BUILDATIONS — /engines
+   Full-bleed card blocks with parallax hover + live badge
+   ============================================================ */
+
 .page {
   min-height: 100vh;
   background: var(--white);
@@ -5,7 +10,7 @@
 }
 
 .header {
-  padding: clamp(100px, 20vh, 200px) var(--margin) 80px;
+  padding: clamp(136px, 26vh, 236px) var(--margin) 80px;
   background: var(--white);
 }
 
@@ -43,21 +48,84 @@
   overflow: hidden;
   text-decoration: none;
   color: var(--black);
-  transition: transform 0.4s var(--ease-out);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
-/* Forcing specific text colors based on the block background */
-.card:nth-child(even) { color: var(--white); }
-.card[href*="seo"] { color: var(--black); }
-.card[href*="whisper"] { color: var(--black); }
-.card[href*="flux"] { color: var(--white); }
-.card[href*="ollama"] { color: var(--white); }
+.card:hover { transform: scale(1.005); }
+.card:hover .decNumber { opacity: 0.1; }
+.card:hover .bgImage { transform: scale(1.04); }
+
+/* Parallax bg image */
+.bgImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
 
 .cardInner {
   max-width: 800px;
   width: 100%;
   position: relative;
   z-index: 1;
+}
+
+/* Status row */
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.liveBadge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Pulsing dot */
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.liveDot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50%       { transform: scale(1.8); opacity: 0; }
+}
+
+.stableBadge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .cardTitle {
@@ -78,19 +146,22 @@
 }
 
 .exploreBtn {
-  font-size: var(--size-label);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding-bottom: 8px;
   border-bottom: 2px solid currentColor;
   opacity: 0.8;
-  transition: opacity 0.2s;
-  display: inline-block;
+  transition: opacity 0.2s, gap 0.2s;
 }
 
 .card:hover .exploreBtn {
   opacity: 1;
+  gap: 12px;
 }
 
 .decNumber {
@@ -106,4 +177,13 @@
   opacity: 0.05;
   user-select: none;
   pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+@media (max-width: 768px) {
+  .header { padding: clamp(100px, 20vh, 160px) var(--margin) 60px; }
+  .card { min-height: 50vh; }
+  .decNumber { display: none; }
+  .cardTitle { font-size: clamp(32px, 10vw, 80px); }
+  .description { font-size: 18px; margin-bottom: 32px; }
 }

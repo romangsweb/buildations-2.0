@@ -1,0 +1,100 @@
+/* ============================================================
+   AnnouncementBar — top-of-page editorial ticker
+   ============================================================ */
+
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500; /* above navbar (200) */
+  height: 36px;
+  background: var(--yellow);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-size: 12px;
+  font-weight: 500;
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  padding: 0 16px;
+  flex: 1;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.content:hover .title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--yellow);
+  padding: 2px 7px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.sep {
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.label {
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow {
+  flex-shrink: 0;
+  opacity: 0.5;
+  font-size: 13px;
+  transition: transform 0.2s;
+}
+.content:hover .arrow { transform: translateX(3px); }
+
+.close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 11px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  padding: 4px 6px;
+  color: var(--black);
+}
+.close:hover { opacity: 0.8; }
+
+@media (max-width: 480px) {
+  .label { display: none; }
+  .sep   { display: none; }
+}

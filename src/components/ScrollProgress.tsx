@@ -23,7 +23,7 @@ export default function ScrollProgress() {
       ref={barRef}
       style={{
         position: 'fixed',
-        top: '60px', /* below navbar */
+        top: '96px', /* 36px bar + 60px navbar */
         left: 0,
         width: '100%',
         height: '3px',

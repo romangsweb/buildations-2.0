@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import styles from './Article.module.css'
 import RelatedArticles from '@/components/RelatedArticles'
 import ScrollProgress from '@/components/ScrollProgress'
+import ShareButton from '@/components/ShareButton'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -159,6 +160,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
           <h1 className={styles.title}>{article.title}</h1>
           {article.excerpt && <p className={styles.excerpt}>{article.excerpt}</p>}
+          <div className={styles.actions}>
+            <ShareButton title={article.title} />
+          </div>
         </div>
       </div>
       {coverUrl && (

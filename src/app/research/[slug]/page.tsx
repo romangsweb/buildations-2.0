@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import styles from './Article.module.css'
 import RelatedArticles from '@/components/RelatedArticles'
+import ScrollProgress from '@/components/ScrollProgress'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -142,6 +143,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <ScrollProgress />
       <div className={styles.header}>
         <div className={styles.container}>
           <div className={styles.meta}>

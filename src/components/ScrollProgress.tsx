@@ -23,14 +23,15 @@ export default function ScrollProgress() {
       ref={barRef}
       style={{
         position: 'fixed',
-        top: 0, left: 0,
+        top: '60px', /* below navbar */
+        left: 0,
         width: '100%',
-        height: '2px',
-        background: 'linear-gradient(90deg, var(--accent), #fff)',
+        height: '3px',
+        background: '#F5E642', /* --yellow brand token */
         transformOrigin: 'left center',
         transform: 'scaleX(0)',
         zIndex: 9999,
-        transition: 'transform 0.08s linear',
+        transition: 'transform 0.1s linear',
       }}
     />
   )

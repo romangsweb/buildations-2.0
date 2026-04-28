@@ -6,21 +6,37 @@ import { CategoryIcon } from '@/components/Icons'
 const COLORS = ['#0A0A0A', '#1A3BFF', '#2EFF6E', '#F5E642', '#FF2E2E']
 
 const ENGINE_COLOR: Record<string, string> = {
-  'adaptive-security': '#FF2E2E',
+  'adaptive-security':    '#FF2E2E',
   'revenue-intelligence': '#F5E642',
-  'search-presence': '#1A3BFF',
+  'search-presence':      '#1A3BFF',
 }
 const ENGINE_LABEL: Record<string, string> = {
-  'adaptive-security': 'Adaptive Security',
+  'adaptive-security':    'Adaptive Security',
   'revenue-intelligence': 'Revenue Intelligence',
-  'search-presence': 'Search & Presence',
+  'search-presence':      'Search & Presence',
 }
 
-export default async function ResearchPage({ searchParams }: { searchParams: Promise<{ view?: string }> }) {
-  const { view } = await searchParams
+const PAGE_SIZE = 8
+
+export default async function ResearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string; page?: string }>
+}) {
+  const { view, page: pageParam } = await searchParams
   const activeView = view === 'cases' ? 'cases' : 'articles'
-  const articles = await getArticles(50)
+
+  const allArticles = await getArticles(100)
   const cases = await getCaseStudies(20)
+
+  // Pagination
+  const currentPage = Math.max(1, parseInt(pageParam || '1', 10))
+  const totalPages = Math.ceil(allArticles.length / PAGE_SIZE)
+  const articles = allArticles.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  )
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -28,46 +44,113 @@ export default async function ResearchPage({ searchParams }: { searchParams: Pro
           <h1 className={styles.title}>Research</h1>
           <p className={styles.subtitle}>Field notes from the build.</p>
           <div className={styles.toggle}>
-            <a href="/research" className={`${styles.toggleBtn} ${activeView === 'articles' ? styles.toggleActive : ''}`}>
-              Articles {articles.length > 0 && <span className={styles.toggleCount}>{articles.length}</span>}
+            <a
+              href="/research"
+              className={`${styles.toggleBtn} ${activeView === 'articles' ? styles.toggleActive : ''}`}
+            >
+              Articles{allArticles.length > 0 && <span className={styles.toggleCount}>{allArticles.length}</span>}
             </a>
-            <a href="/research?view=cases" className={`${styles.toggleBtn} ${activeView === 'cases' ? styles.toggleActive : ''}`}>
-              Case Studies {cases.length > 0 && <span className={styles.toggleCount}>{cases.length}</span>}
+            <a
+              href="/research?view=cases"
+              className={`${styles.toggleBtn} ${activeView === 'cases' ? styles.toggleActive : ''}`}
+            >
+              Case Studies{cases.length > 0 && <span className={styles.toggleCount}>{cases.length}</span>}
             </a>
           </div>
         </div>
       </div>
-      {activeView === 'articles' && <div className={styles.list}>
-        {articles.map((article: any, i: number) => (
-          <Link
-            key={article.slug}
-            href={`/research/${article.slug}`}
-            className={styles.card}
-            style={{ background: COLORS[i % COLORS.length], color: COLORS[i % COLORS.length] === '#F5E642' || COLORS[i % COLORS.length] === '#2EFF6E' ? '#0A0A0A' : '#fff' }}
-          >
-            <div className={styles.cardInner}>
-              <div className={styles.meta}>
-                {article.category && (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <CategoryIcon category={article.category} size={13} color="currentColor" strokeWidth={1.2}/>
-                    {article.category}
+
+      {/* Articles */}
+      {activeView === 'articles' && (
+        <>
+          <div className={styles.list}>
+            {articles.map((article: any, i: number) => {
+              const colorIdx = ((currentPage - 1) * PAGE_SIZE + i) % COLORS.length
+              const bg = COLORS[colorIdx]
+              const color = bg === '#F5E642' || bg === '#2EFF6E' ? '#0A0A0A' : '#fff'
+              const globalIdx = (currentPage - 1) * PAGE_SIZE + i + 1
+              return (
+                <Link
+                  key={article.slug}
+                  href={`/research/${article.slug}`}
+                  className={styles.card}
+                  style={{ background: bg, color }}
+                  aria-label={`Leer: ${article.title}`}
+                >
+                  <div className={styles.cardInner}>
+                    <div className={styles.meta}>
+                      {article.category && (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <CategoryIcon category={article.category} size={13} color="currentColor" strokeWidth={1.2}/>
+                          {article.category}
+                        </span>
+                      )}
+                      <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
+                      {article.readTime && <span>{article.readTime}</span>}
+                    </div>
+                    <h2 className={styles.cardTitle}>{article.title}</h2>
+                    {article.excerpt && (
+                      <p className={styles.excerpt}>{article.excerpt.substring(0, 120)}...</p>
+                    )}
+                    <div className={styles.footer}>
+                      <span>Read Article →</span>
+                    </div>
+                  </div>
+                  <span className={styles.decNumber} aria-hidden="true">
+                    {String(globalIdx).padStart(2, '0')}
                   </span>
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <nav className={styles.pagination} aria-label="Navegación de páginas">
+              <div className={styles.paginationInner}>
+                {currentPage > 1 ? (
+                  <Link
+                    href={`/research?page=${currentPage - 1}`}
+                    className={styles.pageBtn}
+                    aria-label="Página anterior"
+                  >
+                    ← Anterior
+                  </Link>
+                ) : (
+                  <span className={styles.pageBtnDisabled}>← Anterior</span>
                 )}
-                <span>{article.publishedAt ? new Date(article.publishedAt).toISOString().split('T')[0] : ''}</span>
-                {article.readTime && <span>{article.readTime}</span>}
+
+                <div className={styles.pageNumbers}>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                    <Link
+                      key={n}
+                      href={`/research?page=${n}`}
+                      className={`${styles.pageNum} ${n === currentPage ? styles.pageNumActive : ''}`}
+                      aria-current={n === currentPage ? 'page' : undefined}
+                    >
+                      {n}
+                    </Link>
+                  ))}
+                </div>
+
+                {currentPage < totalPages ? (
+                  <Link
+                    href={`/research?page=${currentPage + 1}`}
+                    className={styles.pageBtn}
+                    aria-label="Página siguiente"
+                  >
+                    Siguiente →
+                  </Link>
+                ) : (
+                  <span className={styles.pageBtnDisabled}>Siguiente →</span>
+                )}
               </div>
-              <h2 className={styles.cardTitle}>{article.title}</h2>
-              {article.excerpt && (
-                <p className={styles.excerpt}>{article.excerpt.substring(0, 120)}...</p>
-              )}
-              <div className={styles.footer}>
-                <span>Read Article →</span>
-              </div>
-            </div>
-            <span className={styles.decNumber} aria-hidden="true">0{i + 1}</span>
-          </Link>
-        ))}
-      </div>}
+            </nav>
+          )}
+        </>
+      )}
+
+      {/* Cases */}
       {activeView === 'cases' && cases.length > 0 && (
         <div className={styles.casesSection}>
           <div className={styles.casesHeader}>

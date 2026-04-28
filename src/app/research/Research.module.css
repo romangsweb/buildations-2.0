@@ -177,6 +177,95 @@
   .card { min-height: 50vh; padding: 48px var(--margin); }
 }
 
+/* ─── Pagination ─── */
+.pagination {
+  background: var(--white);
+  color: var(--black);
+  padding: clamp(48px, 8vh, 80px) var(--margin);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.paginationInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pageBtn {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.pageBtn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+.pageBtn:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 3px;
+}
+
+.pageBtnDisabled {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.2;
+  padding: 12px 24px;
+  white-space: nowrap;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pageNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+  transition: background 0.15s, color 0.15s;
+}
+.pageNum:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--black);
+}
+
+.pageNumActive {
+  background: var(--black);
+  color: var(--white);
+  font-weight: 700;
+}
+.pageNumActive:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .paginationInner { flex-wrap: wrap; justify-content: center; }
+}
+
 .casesSection {
   background: var(--white);
   color: var(--black);

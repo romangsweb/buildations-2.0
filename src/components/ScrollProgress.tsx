@@ -21,17 +21,18 @@ export default function ScrollProgress() {
   return (
     <div
       ref={barRef}
+      className="scroll-progress-bar"
       style={{
         position: 'fixed',
-        top: '96px', /* 36px bar + 60px navbar */
         left: 0,
         width: '100%',
         height: '3px',
-        background: '#F5E642', /* --yellow brand token */
+        background: '#F5E642',
         transformOrigin: 'left center',
         transform: 'scaleX(0)',
         zIndex: 9999,
         transition: 'transform 0.1s linear',
+        /* top is controlled via global CSS */
       }}
     />
   )

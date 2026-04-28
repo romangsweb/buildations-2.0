@@ -4,8 +4,7 @@ import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 
 /**
- * PageTransition — wraps children with a fade-in on route change
- * Uses View Transitions API when available, falls back to CSS animation
+ * PageTransition — wraps children with a visible fade+slide on route change
  */
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -14,17 +13,23 @@ export default function PageTransition({ children }: { children: React.ReactNode
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // Cancel any running animation first
+    el.getAnimations().forEach(a => a.cancel())
     el.animate(
       [
-        { opacity: 0, transform: 'translateY(8px)' },
+        { opacity: 0, transform: 'translateY(24px)' },
         { opacity: 1, transform: 'translateY(0)' },
       ],
-      { duration: 350, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+      {
+        duration: 500,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        fill: 'both',
+      }
     )
   }, [pathname])
 
   return (
-    <div ref={ref} style={{ minHeight: '100vh' }}>
+    <div ref={ref} style={{ willChange: 'opacity, transform' }}>
       {children}
     </div>
   )

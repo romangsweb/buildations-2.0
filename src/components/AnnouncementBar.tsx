@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from './AnnouncementBar.module.css'
-import { getFieldNotes } from '@/lib/payload'
 
-// Static fallback
+const STORAGE_KEY = 'buildations_bar_dismissed'
+
 const FALLBACK = {
   text: 'Nuevo en Field Notes',
   title: 'La temperatura 0 miente',
@@ -19,13 +19,29 @@ interface Props {
 }
 
 export default function AnnouncementBar({ text, title, href }: Props) {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false) // start hidden to avoid flash
+
+  useEffect(() => {
+    // Only show if not previously dismissed
+    const dismissed = localStorage.getItem(STORAGE_KEY)
+    if (!dismissed) setVisible(true)
+  }, [])
+
+  useEffect(() => {
+    // Tell the rest of the UI whether the bar is showing
+    document.documentElement.setAttribute('data-bar', visible ? 'visible' : 'hidden')
+  }, [visible])
+
+  const dismiss = () => {
+    setVisible(false)
+    localStorage.setItem(STORAGE_KEY, '1')
+  }
 
   if (!visible) return null
 
-  const displayText = text || FALLBACK.text
+  const displayText  = text  || FALLBACK.text
   const displayTitle = title || FALLBACK.title
-  const displayHref = href || FALLBACK.href
+  const displayHref  = href  || FALLBACK.href
 
   return (
     <div className={styles.bar} role="banner" aria-label="Anuncio reciente">
@@ -38,7 +54,7 @@ export default function AnnouncementBar({ text, title, href }: Props) {
       </Link>
       <button
         className={styles.close}
-        onClick={() => setVisible(false)}
+        onClick={dismiss}
         aria-label="Cerrar anuncio"
       >
         ✕

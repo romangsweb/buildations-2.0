@@ -17,7 +17,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s, top 0.3s;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s, top 0.3s var(--ease-out);
+}
+
+/* When bar is dismissed, navbar slides back to top */
+:global(html[data-bar='hidden']) .navbar {
+  top: 0;
 }
 
 .navbar.scrolled {

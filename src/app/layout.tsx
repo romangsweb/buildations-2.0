@@ -10,6 +10,7 @@ import PageTransition from '@/components/PageTransition';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import BackToTop from '@/components/BackToTop';
 import SkipToContent from '@/components/SkipToContent';
+import ScrollProgress from '@/components/ScrollProgress';
 
 const BASE_URL = 'https://buildations.com'
 
@@ -164,6 +165,7 @@ export default function RootLayout({
         <SkipToContent />
 
         <AnnouncementBar />
+        <ScrollProgress />
         <Navbar />
         <RevealInit />
         <CustomCursor />

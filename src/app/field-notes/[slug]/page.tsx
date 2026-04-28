@@ -1,7 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import styles from './FieldNote.module.css'
 import { getFieldNoteBySlug } from '@/lib/payload'
+import ScrollProgress from '@/components/ScrollProgress'
+import ShareButton from '@/components/ShareButton'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -9,6 +12,8 @@ export const dynamicParams = true
 export async function generateStaticParams() {
   return []
 }
+
+const BASE_URL = 'https://buildations.com'
 
 // All mock notes (same as in list page — in prod this comes from CMS)
 const MOCK_NOTES = [
@@ -110,6 +115,47 @@ Usa agentes cuando el espacio de soluciones es genuinamente abierto. Usa pipelin
   },
 ]
 
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params
+
+  let note: any = null
+  try {
+    note = await getFieldNoteBySlug(slug)
+  } catch {}
+  if (!note) note = MOCK_NOTES.find(n => n.slug === slug)
+  if (!note) return { title: 'Nota no encontrada' }
+
+  return {
+    title: `${note.title} — Field Notes · Buildations`,
+    description: note.excerpt || '',
+    alternates: { canonical: `${BASE_URL}/field-notes/${slug}` },
+    openGraph: {
+      type: 'article',
+      url: `${BASE_URL}/field-notes/${slug}`,
+      title: note.title,
+      description: note.excerpt || '',
+      publishedTime: note.publishedAt,
+      authors: ['Buildations'],
+      images: [
+        {
+          url: `/field-notes/${slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: note.title,
+      description: note.excerpt || '',
+      images: [`/field-notes/${slug}/opengraph-image`],
+    },
+  }
+}
+
 export default async function FieldNotePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   let note: any = await getFieldNoteBySlug(slug)
@@ -124,11 +170,48 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
 
   const paragraphs = note.content.split('\n\n').filter(Boolean)
 
-  // Related: other notes excluding current
-  const related = MOCK_NOTES.filter(n => n.slug !== slug).slice(0, 3)
+  // Pull quote: use the excerpt as the pull quote
+  const pullQuote = note.excerpt
+
+  // Prev / next from mock list (in prod: ordered list from CMS)
+  const currentIdx = MOCK_NOTES.findIndex(n => n.slug === slug)
+  const prevNote = currentIdx > 0 ? MOCK_NOTES[currentIdx - 1] : null
+  const nextNote = currentIdx < MOCK_NOTES.length - 1 ? MOCK_NOTES[currentIdx + 1] : null
+
+  // Related: other notes excluding current and prev/next
+  const related = MOCK_NOTES
+    .filter(n => n.slug !== slug && n.slug !== prevNote?.slug && n.slug !== nextNote?.slug)
+    .slice(0, 2)
+
+  // JSON-LD schema
+  const noteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: note.title,
+    description: note.excerpt || '',
+    url: `${BASE_URL}/field-notes/${slug}`,
+    datePublished: note.publishedAt || '',
+    dateModified: note.publishedAt || '',
+    author: { '@type': 'Organization', name: 'Buildations', url: BASE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Buildations',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon.svg` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/field-notes/${slug}` },
+    articleSection: 'Field Notes',
+  }
 
   return (
     <article className={styles.article}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(noteSchema) }}
+      />
+
+      {/* Reading progress bar */}
+      <ScrollProgress />
+
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.container}>
@@ -144,17 +227,65 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
           </div>
           <h1 className={styles.title}>{note.title}</h1>
           <p className={styles.excerpt}>{note.excerpt}</p>
+
+          {/* Actions row */}
+          <div className={styles.actions}>
+            <ShareButton title={note.title} />
+          </div>
         </div>
       </div>
 
       {/* Content */}
       <div className={styles.content}>
         <div className={styles.contentInner}>
-          {paragraphs.map((p, i) => (
+          {/* Pull quote — first paragraph becomes a styled blockquote */}
+          {paragraphs.length > 0 && (
+            <blockquote className={styles.pullQuote}>
+              {pullQuote}
+            </blockquote>
+          )}
+
+          {/* Body paragraphs */}
+          {paragraphs.map((p: string, i: number) => (
             <p key={i} className={styles.paragraph}>{p}</p>
           ))}
         </div>
       </div>
+
+      {/* Prev / Next navigation */}
+      {(prevNote || nextNote) && (
+        <nav className={styles.prevNext} aria-label="Navegación entre notas">
+          <div className={styles.prevNextInner}>
+            <div className={styles.prevNextSide}>
+              {prevNote && (
+                <Link href={`/field-notes/${prevNote.slug}`} className={styles.prevNextLink} aria-label={`Nota anterior: ${prevNote.title}`}>
+                  <span className={styles.prevNextLabel}>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M8 6H4M5.5 3.5L3 6l2.5 2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Anterior
+                  </span>
+                  <span className={styles.prevNextTitle}>{prevNote.title}</span>
+                </Link>
+              )}
+            </div>
+            <div className={styles.prevNextDivider} aria-hidden="true" />
+            <div className={`${styles.prevNextSide} ${styles.prevNextRight}`}>
+              {nextNote && (
+                <Link href={`/field-notes/${nextNote.slug}`} className={`${styles.prevNextLink} ${styles.prevNextLinkRight}`} aria-label={`Siguiente nota: ${nextNote.title}`}>
+                  <span className={styles.prevNextLabel}>
+                    Siguiente
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M4 6h4M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <span className={styles.prevNextTitle}>{nextNote.title}</span>
+                </Link>
+              )}
+            </div>
+          </div>
+        </nav>
+      )}
 
       {/* More notes */}
       {related.length > 0 && (

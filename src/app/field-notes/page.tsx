@@ -1,12 +1,22 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { getFieldNotes } from '@/lib/payload'
 import styles from './FieldNotes.module.css'
 import { IconSignal } from '@/components/Icons'
+import FieldNotesSearch from '@/components/FieldNotesSearch'
 
 export const metadata: Metadata = {
   title: 'Field Notes — Notas del laboratorio',
   description: 'Observaciones breves, experimentos y reflexiones cortas del laboratorio Buildations. Sin edición extensa — solo criterio en tiempo real.',
+  openGraph: {
+    title: 'Field Notes — Buildations',
+    description: 'Observaciones breves, experimentos y reflexiones cortas del laboratorio.',
+    type: 'website',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': '/field-notes/feed.xml',
+    },
+  },
 }
 
 // Static fallback notes for when CMS has no field-notes content
@@ -61,14 +71,6 @@ const MOCK_NOTES = [
   },
 ]
 
-function formatDate(str: string) {
-  return new Date(str).toLocaleDateString('es-MX', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
-
 export default async function FieldNotesPage() {
   // Try to get field-notes from CMS, fallback to mock
   let notes: any[] = []
@@ -78,14 +80,6 @@ export default async function FieldNotesPage() {
   } catch {
     notes = MOCK_NOTES
   }
-
-  // Group by month
-  const grouped = notes.reduce<Record<string, typeof notes>>((acc, note) => {
-    const month = new Date(note.publishedAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long' })
-    if (!acc[month]) acc[month] = []
-    acc[month].push(note)
-    return acc
-  }, {})
 
   return (
     <div className={styles.page}>
@@ -107,39 +101,8 @@ export default async function FieldNotesPage() {
         </div>
       </div>
 
-      {/* Notes feed */}
-      <div className={styles.feed}>
-        <div className={styles.feedInner}>
-          {Object.entries(grouped).map(([month, monthNotes]) => (
-            <div key={month} className={styles.monthGroup}>
-              <div className={styles.monthLabel}>{month}</div>
-              <div className={styles.notesList}>
-                {monthNotes.map((note: any, i: number) => (
-                  <Link
-                    key={note.slug}
-                    href={`/field-notes/${note.slug}`}
-                    className={styles.noteRow}
-                  >
-                    <div className={styles.noteDate}>
-                      {note.publishedAt
-                        ? new Date(note.publishedAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })
-                        : ''}
-                    </div>
-                    <div className={styles.noteBody}>
-                      <h2 className={styles.noteTitle}>{note.title}</h2>
-                      <p className={styles.noteExcerpt}>{note.excerpt?.substring(0, 140)}…</p>
-                    </div>
-                    <div className={styles.noteMeta}>
-                      {note.readTime && <span className={styles.readTime}>{note.readTime}</span>}
-                      <span className={styles.arrow} aria-hidden="true">→</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Search + Feed (client component) */}
+      <FieldNotesSearch notes={notes} />
     </div>
   )
 }

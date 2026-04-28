@@ -63,6 +63,107 @@
   opacity: 0.25;
 }
 
+/* ─── Search ─── */
+.searchWrap {
+  padding: 28px var(--margin) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.searchInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 20px;
+  position: relative;
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--black);
+  letter-spacing: 0.01em;
+  min-width: 0;
+  appearance: none;
+}
+
+.searchInput::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* remove native search "x" on webkit */
+.searchInput::-webkit-search-cancel-button { display: none; }
+
+.searchClear {
+  background: none;
+  border: none;
+  font-size: 12px;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 2px;
+}
+.searchClear:hover { opacity: 0.7; }
+
+.searchKbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.searchCount {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  padding-bottom: 16px;
+}
+
+/* ─── Empty state ─── */
+.emptyState {
+  padding: clamp(80px, 14vh, 160px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.emptyGlyph {
+  font-size: 48px;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.emptyText {
+  font-size: 16px;
+  opacity: 0.4;
+  max-width: 32ch;
+}
+
 /* ─── Feed ─── */
 .feed {
   padding: 0 var(--margin);
@@ -106,27 +207,58 @@
   grid-template-columns: 72px 1fr auto;
   gap: 24px;
   align-items: start;
-  padding: clamp(24px, 3vh, 36px) 0;
+  padding: clamp(24px, 3vh, 36px) 16px;
+  margin: 0 -16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   text-decoration: none;
   color: var(--black);
-  transition: opacity 0.2s;
   position: relative;
+  border-radius: 2px;
+  transition: background 0.25s var(--ease-out);
+
+  /* Staggered entrance animation */
+  animation: noteIn 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
+
+@keyframes noteIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .noteRow:last-child { border-bottom: none; }
 
-/* Left accent line on hover */
+/* Left accent line on hover — fixed */
 .noteRow::before {
   content: '';
   position: absolute;
-  left: -var(--margin);
+  left: 0;
   top: 0;
   bottom: 0;
   width: 0;
   background: var(--black);
-  transition: width 0.35s var(--ease-out);
+  transition: width 0.3s var(--ease-out);
+  border-radius: 0 0 0 2px;
 }
-.noteRow:hover { opacity: 0.75; }
+
+.noteRow:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.noteRow:hover::before {
+  width: 2px;
+}
+
+/* Focus visible */
+.noteRow:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
 
 .noteDate {
   font-size: 11px;
@@ -148,6 +280,11 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
+  transition: opacity 0.2s;
+}
+
+.noteRow:hover .noteTitle {
+  opacity: 0.7;
 }
 
 .noteExcerpt {
@@ -155,6 +292,15 @@
   line-height: 1.65;
   opacity: 0.5;
   max-width: 60ch;
+}
+
+/* readTime visible on mobile below excerpt */
+.readTimeMobile {
+  display: none;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.3;
 }
 
 .noteMeta {
@@ -179,8 +325,8 @@
   transition: opacity 0.2s, transform 0.2s;
 }
 .noteRow:hover .arrow {
-  opacity: 0.7;
-  transform: translateX(4px);
+  opacity: 0.8;
+  transform: translateX(5px);
 }
 
 /* ─── Responsive ─── */
@@ -193,8 +339,11 @@
   .noteRow {
     grid-template-columns: 56px 1fr;
     gap: 16px;
+    padding: clamp(20px, 3vh, 28px) 12px;
+    margin: 0 -12px;
   }
   .noteMeta { display: none; }
+  .readTimeMobile { display: inline; }
 }
 
 @media (max-width: 480px) {

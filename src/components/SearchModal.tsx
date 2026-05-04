@@ -13,6 +13,8 @@ interface SearchResult {
   publishedAt: string;
   readTime: string;
   type: string;
+  url?: string;
+  engine?: string;
 }
 
 interface SearchResponse {
@@ -117,7 +119,7 @@ export default function SearchModal() {
       e.preventDefault();
       setActiveIdx(i => Math.max(i - 1, -1));
     } else if (e.key === 'Enter' && activeIdx >= 0 && results[activeIdx]) {
-      router.push(`/research/${results[activeIdx].slug}`);
+      router.push(results[activeIdx].url || `/research/${results[activeIdx].slug}`);
       setOpen(false);
     }
   };
@@ -184,7 +186,7 @@ export default function SearchModal() {
             value={query}
             onChange={e => { setQuery(e.target.value); setActiveIdx(-1); }}
             onKeyDown={onKeyDown}
-            placeholder="Buscar artículos, temas, ideas…"
+            placeholder="Buscar artículos, casos, notas, términos…"
             autoComplete="off"
             spellCheck={false}
             aria-label="Search"
@@ -242,7 +244,7 @@ export default function SearchModal() {
                       isActive={i === activeIdx}
                       idx={i}
                       formatDate={formatDate}
-                      onClick={() => { router.push(`/research/${r.slug}`); setOpen(false); }}
+                      onClick={() => { router.push(r.url || `/research/${r.slug}`); setOpen(false); }}
                     />
                   ))}
                 </>
@@ -264,7 +266,7 @@ export default function SearchModal() {
                   isActive={i === activeIdx}
                   idx={i}
                   formatDate={formatDate}
-                  onClick={() => { router.push(`/research/${r.slug}`); setOpen(false); }}
+                  onClick={() => { router.push(r.url || `/research/${r.slug}`); setOpen(false); }}
                 />
               ))}
             </div>
@@ -328,6 +330,11 @@ function ResultRow({
       aria-selected={isActive}
     >
       <span className={styles.resultIdxNum} aria-hidden="true">0{idx + 1}</span>
+      {result.type && result.type !== 'article' && (
+        <span className={styles.resultTypeBadge} data-type={result.type}>
+          {result.type === 'case-study' ? 'Case' : result.type === 'field-note' ? 'Note' : result.type === 'lexicon' ? 'Lexicon' : result.type}
+        </span>
+      )}
       <span className={styles.resultBody}>
         <span className={styles.resultMeta}>
           {result.category && (

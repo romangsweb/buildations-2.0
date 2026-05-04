@@ -4,7 +4,37 @@ import styles from '@/styles/Footer.module.css'
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} role="contentinfo">
+      {/* Newsletter strip */}
+      <div className={styles.newsletter}>
+        <div className={styles.newsletterInner}>
+          <div className={styles.newsletterText}>
+            <p className={styles.newsletterLabel}>Research Newsletter</p>
+            <p className={styles.newsletterDesc}>
+              Nuevos artículos, resultados de engines y decisiones de infraestructura — directamente en tu inbox.
+            </p>
+          </div>
+          <form
+            className={styles.newsletterForm}
+            action="https://formspree.io/f/buildations"
+            method="POST"
+            aria-label="Suscribirse al newsletter"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="tu@email.com"
+              required
+              className={styles.newsletterInput}
+              aria-label="Tu email"
+            />
+            <button type="submit" className={styles.newsletterBtn}>
+              Suscribirse →
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div className={styles.top}>
         <div className={styles.brand}>
           <div className={styles.footerLogo}>

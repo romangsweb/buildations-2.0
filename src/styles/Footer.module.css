@@ -1,42 +1,160 @@
 .footer {
   background: var(--black);
   color: var(--white);
-  padding: clamp(60px, 8vh, 100px) var(--margin) 40px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
+
+/* ============================================================
+   NEWSLETTER STRIP
+   ============================================================ */
+
+.newsletter {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(40px, 6vh, 72px) var(--margin);
+  background: rgba(255,255,255,0.02);
+}
+
+.newsletterInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.newsletterLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+
+.newsletterDesc {
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 400;
+  opacity: 0.7;
+  line-height: 1.5;
+  max-width: 48ch;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+  min-width: 280px;
+}
+
+.newsletterInput {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-right: none;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 12px 18px;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+
+.newsletterInput::placeholder { opacity: 0.35; color: var(--white); }
+.newsletterInput:focus { border-color: rgba(255,255,255,0.4); }
+
+.newsletterBtn {
+  background: var(--yellow);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.newsletterBtn:hover { opacity: 0.85; }
+
+/* ============================================================
+   MAIN FOOTER
+   ============================================================ */
+
 .top {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 80px;
-  padding-bottom: 60px;
+  padding: clamp(60px, 8vh, 100px) var(--margin) 60px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
 }
+
 .brand {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.wordmark {
+
+/* Footer logo */
+.footerLogo {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
 }
-.wordmarkGlyph {
-  opacity: 0.5;
+
+.footerLogoIcon {
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
+
+.footerLogoLetter {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+
+.footerLogoDot {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  background: var(--yellow);
+}
+
+.wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
 .tagline {
-  font-size: clamp(14px, 1.5vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.65;
   opacity: 0.5;
   max-width: 28ch;
 }
+
 .cta {
   display: inline-block;
   font-size: var(--size-label);
@@ -48,19 +166,27 @@
   padding-bottom: 4px;
   border-bottom: 1px solid rgba(255,255,255,0.3);
   width: fit-content;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, color 0.2s;
 }
-.cta:hover { border-color: var(--white); }
+
+.cta:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+/* Nav links */
 .nav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
 }
+
 .navCol {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+
 .navLabel {
   font-size: 10px;
   font-weight: 600;
@@ -69,40 +195,50 @@
   opacity: 0.3;
   margin-bottom: 4px;
 }
+
 .navCol a {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--white);
   text-decoration: none;
   opacity: 0.55;
   transition: opacity 0.2s;
+  line-height: 1.5;
 }
+
 .navCol a:hover { opacity: 1; }
+
 .stackItem {
   font-size: 12px;
-  opacity: 0.35;
-  font-family: 'Courier New', monospace;
-  line-height: 1.6;
+  opacity: 0.3;
+  font-family: 'Space Grotesk', monospace;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
 }
+
+/* Bottom bar */
 .bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 32px;
-  max-width: 1200px;
+  padding: 32px var(--margin);
+  max-width: 1440px;
   margin: 0 auto;
   flex-wrap: wrap;
   gap: 16px;
 }
+
 .copy {
   font-size: 12px;
   opacity: 0.3;
   letter-spacing: 0.05em;
 }
+
 .location {
   font-size: 12px;
   opacity: 0.3;
   letter-spacing: 0.05em;
 }
+
 .status {
   display: flex;
   align-items: center;
@@ -111,32 +247,36 @@
   opacity: 0.5;
   letter-spacing: 0.05em;
 }
+
 .statusDot {
-  position: relative;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #2EFF6E;
+  animation: pulse 2s ease-in-out infinite;
 }
-.statusDot::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 1px solid #2EFF6E;
-  animation: ring 2s ease-out infinite;
-  opacity: 0;
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 255, 110, 0.4); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(46, 255, 110, 0); }
 }
-@keyframes ring {
-  0%   { transform: scale(0.6); opacity: 0.8; }
-  100% { transform: scale(1.8); opacity: 0; }
-}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 
 @media (max-width: 900px) {
   .top { grid-template-columns: 1fr; gap: 48px; }
   .nav { grid-template-columns: repeat(2, 1fr); }
+  .newsletterInner { flex-direction: column; align-items: flex-start; }
+  .newsletterForm { width: 100%; min-width: unset; }
+  .newsletterInput { flex: 1; }
 }
+
 @media (max-width: 500px) {
-  .nav { grid-template-columns: 1fr; }
+  .nav { grid-template-columns: 1fr 1fr; gap: 32px; }
   .bottom { flex-direction: column; align-items: flex-start; }
+  .newsletterForm { flex-direction: column; }
+  .newsletterInput { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
+  .newsletterBtn { width: 100%; text-align: center; padding: 14px; }
 }

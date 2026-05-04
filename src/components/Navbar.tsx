@@ -63,13 +63,11 @@ export default function Navbar() {
       <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${dark ? styles.navDark : styles.navLight}`}>
         {/* Logo / Wordmark */}
         <Link href="/" className={styles.logo} aria-label="Buildations Home">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={styles.logoGlyph}>
-            <rect x="1" y="1" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            <rect x="9" y="1" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            <rect x="1" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-          </svg>
-          <span>Buildations</span>
+          <span className={styles.logoIcon} aria-hidden="true">
+            <span className={styles.logoIconLetter}>B</span>
+            <span className={styles.logoIconDot} />
+          </span>
+          <span className={styles.logoText}>Buildations</span>
         </Link>
 
         {/* Desktop nav */}

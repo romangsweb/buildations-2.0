@@ -48,12 +48,50 @@
 }
 .logo:hover { opacity: 0.55; }
 
-.logoGlyph {
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  opacity: 0.8;
-  transition: opacity 0.2s;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, background 0.2s;
 }
-.logo:hover .logoGlyph { opacity: 1; }
+
+.logo:hover .logoIcon {
+  transform: scale(0.95);
+}
+
+.logoIconLetter {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1;
+  font-family: var(--font-sans);
+  transition: color 0.2s;
+}
+
+.logoIconDot {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  background: var(--yellow);
+}
+
+.logoText {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: color 0.2s;
+}
 
 /* ─── Desktop Nav ─── */
 .desktopNav {
@@ -148,7 +186,7 @@
 }
 
 /* ─── Color Modes ─── */
-.navDark .logo,
+.navDark .logoText,
 .navDark .navLink,
 .navDark .menuBtn,
 .navDark .ctaPill svg { color: var(--white); }
@@ -158,7 +196,10 @@
   background: var(--white);
 }
 
-.navLight .logo,
+.navDark .logoIcon { background: var(--white); }
+.navDark .logoIconLetter { color: var(--black); }
+
+.navLight .logoText,
 .navLight .navLink,
 .navLight .menuBtn { color: var(--black); }
 
@@ -166,6 +207,9 @@
   color: var(--white);
   background: var(--black);
 }
+
+.navLight .logoIcon { background: var(--black); }
+.navLight .logoIconLetter { color: var(--white); }
 
 .navLight.scrolled {
   background: rgba(245, 245, 240, 0.92);

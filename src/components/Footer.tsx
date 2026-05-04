@@ -7,15 +7,13 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.top}>
         <div className={styles.brand}>
-          <span className={styles.wordmark}>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={styles.wordmarkGlyph}>
-              <rect x="1" y="1" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-              <rect x="9" y="1" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-              <rect x="1" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-              <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            </svg>
-            Buildations
-          </span>
+          <div className={styles.footerLogo}>
+            <span className={styles.footerLogoIcon} aria-hidden="true">
+              <span className={styles.footerLogoLetter}>B</span>
+              <span className={styles.footerLogoDot} />
+            </span>
+            <span className={styles.wordmark}>Buildations</span>
+          </div>
           <p className={styles.tagline}>
             AI infrastructure built from the ground up.<br />
             Not rented. Not abstracted. Owned.

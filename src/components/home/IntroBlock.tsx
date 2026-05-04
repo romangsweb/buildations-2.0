@@ -1,16 +1,83 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import styles from '@/styles/IntroBlock.module.css';
 
 const stats = [
-  { num: '3', label: 'Engines in production' },
-  { num: '52', label: 'Docker containers running' },
-  { num: '1.4M+', label: 'Security events processed' },
-  { num: '338', label: 'Research articles published' },
-  { num: '9', label: 'Threat monitoring sources' },
-  { num: '0', label: 'Critical cloud dependencies' },
-  { num: '367K', label: 'Search data rows updated daily' },
-  { num: '24/7', label: 'Autonomous operation' },
+  { num: 3, display: '3', label: 'Engines in production', suffix: '' },
+  { num: 52, display: '52', label: 'Docker containers running', suffix: '' },
+  { num: 1400000, display: '1.4M+', label: 'Security events processed', suffix: '' },
+  { num: 338, display: '338', label: 'Research articles published', suffix: '' },
+  { num: 9, display: '9', label: 'Threat monitoring sources', suffix: '' },
+  { num: 0, display: '0', label: 'Critical cloud dependencies', suffix: '' },
+  { num: 367000, display: '367K', label: 'Search data rows updated daily', suffix: '' },
+  { num: null, display: '24/7', label: 'Autonomous operation', suffix: '' },
 ];
+
+function useCountUp(target: number | null, duration = 1800, isVisible: boolean) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible || target === null) return;
+    if (target === 0) { setCount(0); return; }
+
+    const start = performance.now();
+    const animate = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [isVisible, target, duration]);
+
+  return count;
+}
+
+function formatCount(count: number, display: string): string {
+  if (display === '24/7') return '24/7';
+  if (display === '0') return '0';
+  if (display.includes('M')) {
+    const millions = count / 1_000_000;
+    return `${millions.toFixed(1)}M+`;
+  }
+  if (display.includes('K')) {
+    const k = Math.round(count / 1000);
+    return `${k}K`;
+  }
+  return String(count);
+}
+
+function StatCard({ stat }: { stat: typeof stats[0] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const count = useCountUp(stat.num, 1600, visible);
+  const displayed = visible
+    ? stat.num === null
+      ? stat.display
+      : formatCount(count, stat.display)
+    : '—';
+
+  return (
+    <div ref={ref} className={`${styles.stat} ${visible ? styles.statVisible : ''}`}>
+      <span className={styles.statNum}>{displayed}</span>
+      <span className={styles.statLabel}>{stat.label}</span>
+    </div>
+  );
+}
 
 export default function IntroBlock() {
   return (
@@ -28,12 +95,9 @@ export default function IntroBlock() {
         </div>
         <span className={styles.decNumber} aria-hidden="true">02</span>
       </section>
-      <section className={styles.stats}>
+      <section className={styles.stats} aria-label="Métricas de producción">
         {stats.map((s, i) => (
-          <div key={i} className={styles.stat} style={{ transitionDelay: `${i * 0.08}s` }}>
-            <span className={styles.statNum}>{s.num}</span>
-            <span className={styles.statLabel}>{s.label}</span>
-          </div>
+          <StatCard key={i} stat={s} />
         ))}
       </section>
     </>

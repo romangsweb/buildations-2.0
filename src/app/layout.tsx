@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: 'Laboratorio editorial de inteligencia artificial. Research, motores de IA en producción y exploración creativa desde Ciudad de México.',
     images: [
       {
-        url: '/og-default.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Buildations — AI Research Laboratory',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     creator: '@buildations',
     title: 'Buildations — AI Research & Intelligence',
     description: 'Laboratorio editorial de inteligencia artificial desde Ciudad de México.',
-    images: ['/og-default.png'],
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: BASE_URL,
@@ -73,10 +73,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     apple: '/apple-touch-icon.png',
   },
+  manifest: '/site.webmanifest',
 };
 
 // Organization JSON-LD schema

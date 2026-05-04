@@ -46,8 +46,31 @@ export default async function CaseStudyPage({ params }: Props) {
   const isDark = cs.engine === 'adaptive-security' || cs.engine === 'search-presence'
   const textColor = isDark ? '#ffffff' : '#0A0A0A'
 
+
+  const BASE_URL = 'https://buildations.com'
+  const caseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: cs.title,
+    description: cs.summary || '',
+    url: `${BASE_URL}/research/cases/${slug}`,
+    datePublished: cs.publishedAt || cs.createdAt,
+    dateModified: cs.updatedAt,
+    author: { '@type': 'Organization', name: 'Buildations', url: BASE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Buildations',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon.svg` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/research/cases/${slug}` },
+    articleSection: cs.engine || '',
+    about: { '@type': 'Thing', name: cs.industry || '' },
+    proficiencyLevel: cs.difficulty || 'intermediate',
+  }
+
   return (
     <div className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseSchema) }} />
       <section className={styles.header} style={{ backgroundColor: engineColor, color: textColor }}>
         <div className={styles.container}>
           <div className={styles.breadcrumb}>

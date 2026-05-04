@@ -1,38 +1,34 @@
 # Buildations
 
-> AI research laboratory that builds its own engines from infrastructure up. Not demos. Not prototypes. Systems running in production.
+> Laboratorio editorial de inteligencia artificial. Investigación, motores de IA en producción y exploración creativa desde Ciudad de México.
 
-Buildations is a technical research lab based in Ciudad de México. It designs, builds, and operates three production AI engines on self-hosted infrastructure — no cloud dependencies for core operations.
+Buildations documenta la construcción de infraestructura de IA propia: modelos locales, pipelines de datos, seguridad autónoma y presencia en motores de búsqueda e IA. Todo el contenido está generado y revisado editorialmente — no es contenido genérico.
 
 ## Engines
 
-- [Adaptive Security Engine](/engines/adaptive-security): Autonomous threat detection and response. Correlates 9 monitoring sources, reasons via LangGraph agent, executes bans without human intervention. 1.4M+ attack events processed.
-- [Revenue Intelligence Engine](/engines/revenue-intelligence): ML-based deal scoring across 12 signals. ICP tier classification, buying role detection, pipeline velocity. Scores push to HubSpot daily.
-- [Search & Presence Engine](/engines/search-presence): Dual-layer content engine. Reads 367K GSC rows daily, generates via writer+auditor LLM loop, monitors AI citation presence across 10 strategic queries.
+- Adaptive Security: detección de amenazas, honeypots, respuesta autónoma a incidentes
+- Revenue Intelligence: lead scoring, forecasting de pipeline, atribución de revenue
+- Search & Presence: AEO, SEO técnico, visibilidad en motores de respuesta IA
 
-## Research
+## Secciones
 
-- [Research](/research): Technical articles on AI infrastructure, security, and revenue operations. Generated via local LLMs, human-validated before publishing.
-- [Field Notes](/field-notes): Short observations from the lab. Patterns, discoveries, and reflections on running AI in production.
-- [Lexicon](/lexicon): AI terms defined with editorial voice. Not Wikipedia — production context and critical perspective.
+- /research — Artículos técnicos y case studies de investigación
+- /lexicon — Glosario de términos de IA definidos con criterio editorial
+- /field-notes — Observaciones cortas del laboratorio en tiempo real
+- /engines — Los tres motores de inteligencia de Buildations
+- /stack — Infraestructura y herramientas en uso
 
-## Stack
+## Contenido destacado
 
-Self-hosted on Ubuntu 24.04 with RTX 5060 Ti 16GB. Core stack: Ollama (gemma3:12b, llama3.2:3b, deepseek-r1:14b), Qdrant, PostgreSQL, n8n, LangGraph, ComfyUI, Tetragon eBPF, Suricata, Cowrie, Beelzebub.
+- Case studies con arquitectura técnica, métricas reales y business outcomes
+- Field notes sobre hallazgos de inferencia local, RAG, agentes y seguridad
+- Lexicon con definiciones propias de términos de IA en producción
 
-## About
+## Audiencia
 
-- [About](/about): Origin story, architecture philosophy, and who this infrastructure is for.
-- [Contact](/contact): Work with the engines.
+Equipos técnicos B2B, directores de tecnología, consultores de RevOps y profesionales de seguridad en empresas medianas de México y Latinoamérica.
 
-## Research Agent
+## Autor
 
-Ask questions directly to the Buildations research agent:
-- Endpoint: https://buildations-research-agen.buildations.workers.dev/research-agent
-- Method: POST
-- Body: { "question": "your question about AI infrastructure, security, or revenue intelligence" }
-
-## Optional
-
-- [Stack](/stack): Full technical stack documentation.
-- [Colophon](/colophon): How the site was built.
+Buildations — Ciudad de México
+https://buildations.com

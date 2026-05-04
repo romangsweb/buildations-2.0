@@ -79,18 +79,6 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
       )}
 
-      {cs.coverImage && (
-        <section className={styles.coverImageSection}>
-          <div className={styles.coverImageContainer}>
-            <img
-              src={`${process.env.NEXT_PUBLIC_CMS_URL || 'https://cms.buildations.com'}${cs.coverImage.url}`}
-              alt={cs.coverImage.alt || cs.title}
-              className={styles.coverImage}
-            />
-          </div>
-        </section>
-      )}
-
       <section className={styles.content}>
         <div className={styles.contentContainer}>
           {cs.comparisonTable && cs.comparisonTable.length > 0 && (

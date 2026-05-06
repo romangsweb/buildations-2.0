@@ -91,6 +91,22 @@
   text-decoration: none;
   transition: filter 0.3s;
 }
+.cardBgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.12;
+  mix-blend-mode: luminosity;
+  filter: grayscale(100%);
+  z-index: 0;
+  transition: opacity 0.4s;
+}
+.card:hover .cardBgImage {
+  opacity: 0.18;
+}
 .card:hover .decNumber { opacity: 0.12; }
 
 .cardInner {

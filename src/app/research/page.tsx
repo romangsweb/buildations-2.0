@@ -78,6 +78,14 @@ export default async function ResearchPage({
                   style={{ background: bg, color }}
                   aria-label={`Leer: ${article.title}`}
                 >
+                  {article.coverImage?.url && (
+                    <img
+                      src={`${CMS_URL}${article.coverImage.url}`}
+                      alt=""
+                      className={styles.cardBgImage}
+                      aria-hidden="true"
+                    />
+                  )}
                   <div className={styles.cardInner}>
                     <div className={styles.meta}>
                       {article.category && (

@@ -62,6 +62,7 @@ export async function GET(req: NextRequest) {
     type,
     url,
     engine: item.engine || item.relatedEngine || '',
+    coverImage: item.coverImage?.url ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'}${item.coverImage.url}` : undefined,
   }))
 
   return NextResponse.json({ results: scored, total: scored.length, suggested: false })

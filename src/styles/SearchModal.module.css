@@ -420,3 +420,13 @@
   .backdrop { padding-top: 0; align-items: flex-end; }
   .modal { border-radius: 12px 12px 0 0; }
 }
+
+.resultThumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  opacity: 0.85;
+  filter: grayscale(20%);
+}

@@ -53,7 +53,7 @@ export async function getEngineBySlug(slug: string) {
 
 export async function getCaseStudies(limit = 20) {
   try {
-    const res = await fetch(`${PAYLOAD_URL}/api/case-studies?limit=${limit}&where[status][equals]=published&sort=-createdAt`, {
+    const res = await fetch(`${PAYLOAD_URL}/api/case-studies?limit=${limit}&where[status][equals]=published&sort=-createdAt&depth=1`, {
       cache: 'no-store'
     })
     if (!res.ok) return []

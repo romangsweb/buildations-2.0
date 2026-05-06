@@ -16,6 +16,7 @@ const ENGINE_LABEL: Record<string, string> = {
   'search-presence':      'Search & Presence',
 }
 
+const CMS_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'
 const PAGE_SIZE = 8
 
 export default async function ResearchPage({
@@ -169,6 +170,13 @@ export default async function ResearchPage({
                   className={styles.caseCard}
                   style={{ borderLeft: `4px solid ${color}`, '--card-color': color } as React.CSSProperties}
                 >
+                  {cs.coverImage?.url && (
+                    <img
+                      src={`${CMS_URL}${cs.coverImage.url}`}
+                      alt={cs.title}
+                      className={styles.caseCardImage}
+                    />
+                  )}
                   <div className={styles.caseEngine} style={{ color }}>
                     {ENGINE_LABEL[cs.engine]}
                   </div>

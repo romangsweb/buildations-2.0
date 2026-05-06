@@ -1,7 +1,7 @@
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'
 
 export async function getArticles(limit = 10) {
-  const res = await fetch(`${PAYLOAD_URL}/api/articles?limit=${limit}&where[status][equals]=published`, {
+  const res = await fetch(`${PAYLOAD_URL}/api/articles?limit=${limit}&where[status][equals]=published&depth=1`, {
     cache: 'no-store'
   })
   if (!res.ok) return []

@@ -20,6 +20,15 @@ async function getRedirects() {
 }
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cms.buildations.com',
+        pathname: '/api/media/file/**',
+      },
+    ],
+  },
   async redirects() {
     return await getRedirects()
   },

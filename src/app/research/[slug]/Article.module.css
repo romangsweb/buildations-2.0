@@ -78,11 +78,36 @@
   flex-wrap: wrap;
 }
 
+.coverImageWrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
 .coverImage {
   width: 100%;
-  height: clamp(300px, 50vh, 600px);
+  height: clamp(320px, 50vh, 640px);
   object-fit: cover;
   display: block;
+  filter: brightness(0.94);
+  transition: filter 0.5s;
+}
+
+.coverImageWrap:hover .coverImage {
+  filter: brightness(1);
+}
+
+.coverImageWrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--white));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .content {

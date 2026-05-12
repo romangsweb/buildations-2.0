@@ -5,6 +5,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LatexRenderer from '@/components/LatexRenderer'
 
+const CMS_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://cms.buildations.com'
+const BASE_URL_SITE = 'https://buildations.com'
+
 export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
@@ -30,9 +33,31 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const cs = await getCaseStudyBySlug(slug)
+  if (!cs) return { title: 'Case Study Not Found' }
+
+  const coverUrl = cs.coverImage?.url
+    ? `${CMS_URL}${cs.coverImage.url}`
+    : null
+
   return {
-    title: cs ? cs.title + ' | Case Study' : 'Case Study Not Found',
-    description: cs?.summary || '',
+    title: `${cs.title} | Case Study — Buildations`,
+    description: cs.summary || '',
+    alternates: { canonical: `${BASE_URL_SITE}/research/cases/${slug}` },
+    openGraph: {
+      type: 'article',
+      url: `${BASE_URL_SITE}/research/cases/${slug}`,
+      title: cs.title,
+      description: cs.summary || '',
+      ...(coverUrl && {
+        images: [{ url: coverUrl, width: 1344, height: 768, alt: cs.coverImage?.alt || cs.title }],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: cs.title,
+      description: cs.summary || '',
+      ...(coverUrl && { images: [coverUrl] }),
+    },
   }
 }
 
@@ -45,6 +70,10 @@ export default async function CaseStudyPage({ params }: Props) {
   const engineLabel = ENGINE_LABEL[cs.engine] || cs.engine
   const isDark = cs.engine === 'adaptive-security' || cs.engine === 'search-presence'
   const textColor = isDark ? '#ffffff' : '#0A0A0A'
+
+  const coverUrl = cs.coverImage?.url
+    ? `${CMS_URL}${cs.coverImage.url}`
+    : null
 
 
   const BASE_URL = 'https://buildations.com'
@@ -87,6 +116,18 @@ export default async function CaseStudyPage({ params }: Props) {
           <p className={styles.summary}>{cs.summary}</p>
         </div>
       </section>
+
+      {/* Cover image hero */}
+      {coverUrl && (
+        <div className={styles.coverWrap}>
+          <img
+            src={coverUrl}
+            alt={cs.coverImage?.alt || cs.title}
+            className={styles.coverImage}
+          />
+          <div className={styles.coverOverlay} style={{ background: engineColor }} />
+        </div>
+      )}
 
       {cs.outcomes && cs.outcomes.length > 0 && (
         <section className={styles.outcomes}>

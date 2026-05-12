@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import styles from './FieldNote.module.css'
-import { getFieldNoteBySlug } from '@/lib/payload'
+import { getFieldNoteBySlug, getFieldNotes } from '@/lib/payload'
 import ScrollProgress from '@/components/ScrollProgress'
 import ShareButton from '@/components/ShareButton'
 
@@ -173,14 +173,22 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
   // Pull quote: use the excerpt as the pull quote
   const pullQuote = note.excerpt
 
-  // Prev / next from mock list (in prod: ordered list from CMS)
-  const currentIdx = MOCK_NOTES.findIndex(n => n.slug === slug)
-  const prevNote = currentIdx > 0 ? MOCK_NOTES[currentIdx - 1] : null
-  const nextNote = currentIdx < MOCK_NOTES.length - 1 ? MOCK_NOTES[currentIdx + 1] : null
+  // Load all notes for prev/next/related — prefer CMS, fallback to MOCK
+  let allNotes: any[] = []
+  try {
+    const cms = await getFieldNotes(100)
+    allNotes = cms.length > 0 ? cms : MOCK_NOTES
+  } catch {
+    allNotes = MOCK_NOTES
+  }
+
+  const currentIdx = allNotes.findIndex((n: any) => n.slug === slug)
+  const prevNote = currentIdx > 0 ? allNotes[currentIdx - 1] : null
+  const nextNote = currentIdx < allNotes.length - 1 ? allNotes[currentIdx + 1] : null
 
   // Related: other notes excluding current and prev/next
-  const related = MOCK_NOTES
-    .filter(n => n.slug !== slug && n.slug !== prevNote?.slug && n.slug !== nextNote?.slug)
+  const related = allNotes
+    .filter((n: any) => n.slug !== slug && n.slug !== prevNote?.slug && n.slug !== nextNote?.slug)
     .slice(0, 2)
 
   // JSON-LD schema

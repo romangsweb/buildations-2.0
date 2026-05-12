@@ -166,7 +166,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
       {coverUrl && (
-        <img src={coverUrl} alt={article.title} className={styles.coverImage} />
+        <div className={styles.coverImageWrap}>
+          <img src={coverUrl} alt={article.coverImage?.alt || article.title} className={styles.coverImage} />
+        </div>
       )}
       <div className={styles.content}>
         <div className={styles.containerText}>

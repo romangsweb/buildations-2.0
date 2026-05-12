@@ -176,30 +176,50 @@ export default async function ResearchPage({
                   key={cs.slug}
                   href={`/research/cases/${cs.slug}`}
                   className={styles.caseCard}
-                  style={{ borderLeft: `4px solid ${color}`, '--card-color': color } as React.CSSProperties}
+                  style={{ '--card-color': color } as React.CSSProperties}
+                  aria-label={`Caso de éxito: ${cs.title}`}
                 >
-                  {cs.coverImage?.url && (
-                    <img
-                      src={`${CMS_URL}${cs.coverImage.url}`}
-                      alt={cs.title}
-                      className={styles.caseCardImage}
-                    />
-                  )}
-                  <div className={styles.caseEngine} style={{ color }}>
-                    {ENGINE_LABEL[cs.engine]}
+                  {/* Image hero */}
+                  <div className={styles.caseCardImageWrap}>
+                    <div className={styles.caseCardEngineBar} />
+                    {cs.coverImage?.url ? (
+                      <img
+                        src={`${CMS_URL}${cs.coverImage.url}`}
+                        alt={cs.coverImage.alt || cs.title}
+                        className={styles.caseCardImage}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className={styles.caseCardImagePlaceholder}>
+                        <div
+                          className={styles.caseCardImagePlaceholderInner}
+                          style={{ background: color }}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <h3 className={styles.caseTitle}>{cs.title}</h3>
-                  <p className={styles.caseSummary}>{cs.summary?.substring(0, 100)}...</p>
-                  {cs.outcomes && cs.outcomes.length > 0 && (
-                    <div className={styles.caseOutcomes}>
-                      {cs.outcomes.slice(0, 2).map((o: any, j: number) => (
-                        <span key={j} className={styles.caseOutcome}>
-                          <span style={{ color }}>{o.value}</span> {o.metric}
-                        </span>
-                      ))}
+
+                  {/* Body */}
+                  <div className={styles.caseCardBody}>
+                    <div className={styles.caseEngine} style={{ color }}>
+                      {ENGINE_LABEL[cs.engine] || cs.engine}
                     </div>
-                  )}
-                  <span className={styles.caseRead}>Read case study →</span>
+                    <h3 className={styles.caseTitle}>{cs.title}</h3>
+                    <p className={styles.caseSummary}>{cs.summary}</p>
+
+                    {cs.outcomes && cs.outcomes.length > 0 && (
+                      <div className={styles.caseOutcomes}>
+                        {cs.outcomes.slice(0, 2).map((o: any, j: number) => (
+                          <div key={j} className={styles.caseOutcome}>
+                            <span className={styles.caseOutcomeValue} style={{ color }}>{o.value}</span>
+                            <span className={styles.caseOutcomeMetric}>{o.metric}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <span className={styles.caseRead}>Read case study →</span>
+                  </div>
                 </Link>
               )
             })}

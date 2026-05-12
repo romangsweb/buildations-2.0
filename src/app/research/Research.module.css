@@ -421,32 +421,40 @@
 
 .caseOutcomes {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
   margin-top: 4px;
   padding-top: 14px;
   border-top: 1px solid rgba(0,0,0,0.06);
+  align-items: flex-start;
 }
 
 .caseOutcome {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 .caseOutcomeValue {
-  font-size: 18px;
+  font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .caseOutcomeMetric {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  opacity: 0.45;
+  opacity: 0.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
 .caseRead {

@@ -3,74 +3,218 @@
   background: var(--white);
   color: var(--black);
 }
+
+/* ─── Hero ─── */
 .hero {
-  padding: clamp(140px, 20vh, 200px) var(--margin) 80px;
+  padding: clamp(140px, 20vh, 200px) var(--margin) clamp(60px, 8vh, 100px);
   background: var(--black);
   color: var(--white);
 }
+
 .container {
   max-width: 1200px;
+  margin: 0 auto;
 }
+
 .label {
   font-size: var(--size-label);
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.4;
   margin-bottom: 32px;
 }
+
 .title {
-  font-size: clamp(40px, 8vw, 120px);
+  font-size: clamp(48px, 9vw, 140px);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 0.9;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   text-transform: uppercase;
 }
+
 .sub {
-  font-size: clamp(18px, 2vw, 28px);
-  line-height: 1.4;
-  max-width: 40ch;
-  opacity: 0.6;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.5;
+  max-width: 38ch;
+  opacity: 0.55;
+  font-weight: 300;
 }
+
+/* ─── Engines bar ─── */
+.enginesBar {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 24px var(--margin) 32px;
+}
+
+.enginesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.enginesLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0.3;
+  white-space: nowrap;
+}
+
+.enginesRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.engineChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.engineChip:hover {
+  border-color: var(--chip-color, rgba(255,255,255,0.5));
+  background: rgba(255,255,255,0.05);
+}
+
+.engineChipDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Form section ─── */
 .formSection {
   padding: clamp(80px, 10vh, 140px) var(--margin);
 }
+
 .formContainer {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 340px;
   gap: 80px;
   align-items: start;
 }
+
 .formWrap {
   min-height: 400px;
 }
+
+/* ─── Info sidebar ─── */
 .info {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 28px;
   padding-top: 8px;
 }
+
 .infoBlock {}
+
 .infoLabel {
-  font-size: var(--size-label);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  opacity: 0.4;
+  opacity: 0.35;
   margin-bottom: 8px;
 }
+
 .infoValue {
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.4;
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoList li {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.7;
+  padding-left: 16px;
+  position: relative;
+}
+
+.infoList li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
+  font-size: 12px;
+}
+
+.infoDivider {
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+
+/* ─── Engine mini-cards ─── */
+.engineCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.engineCard {
+  padding: 16px 20px;
+  border-left: 3px solid var(--chip-color, #0A0A0A);
+  background: rgba(0,0,0,0.02);
+}
+
+.engineCardLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.engineCardDesc {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.55;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
   .formContainer {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 56px;
   }
+  .enginesContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title { line-height: 0.92; }
 }

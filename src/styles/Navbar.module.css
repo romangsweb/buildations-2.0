@@ -7,7 +7,7 @@
 /* ─── Base ─── */
 .navbar {
   position: fixed;
-  top: 36px; /* announcement bar height */
+  top: 0;
   left: 0;
   right: 0;
   z-index: 200;
@@ -17,12 +17,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s, top 0.3s var(--ease-out);
-}
-
-/* When bar is dismissed, navbar slides back to top */
-:global(html[data-bar='hidden']) .navbar {
-  top: 0;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
 }
 
 .navbar.scrolled {

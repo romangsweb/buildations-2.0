@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import RevealInit from '@/components/RevealInit';
 import CustomCursor from '@/components/CustomCursor';
 import PageTransition from '@/components/PageTransition';
-import AnnouncementBar from '@/components/AnnouncementBar';
+
 import BackToTop from '@/components/BackToTop';
 import SkipToContent from '@/components/SkipToContent';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -137,6 +137,15 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 
+        {/* Google Tag Manager */}
+        <Script id="gtm-script" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-MPLQ8T53');`}
+        </Script>
+
         {/* Structured data */}
         <script
           type="application/ld+json"
@@ -148,7 +157,17 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Google Analytics */}
+        {/* GTM noscript fallback — must be first element inside body */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MPLQ8T53"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
+        {/* Google Analytics (direct — coexists with GTM) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-037W81DJZW"
           strategy="afterInteractive"
@@ -165,7 +184,7 @@ export default function RootLayout({
         {/* Skip to main content — accessibility */}
         <SkipToContent />
 
-        <AnnouncementBar />
+
         <ScrollProgress />
         <Navbar />
         <RevealInit />

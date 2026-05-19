@@ -4,17 +4,18 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import styles from '@/styles/Navbar.module.css';
-import { IconHome, IconResearch, IconEngines, IconAbout, IconContact, IconMenu, IconClose } from '@/components/Icons';
+import { IconHome, IconResearch, IconEngines, IconAbout, IconContact, IconMenu, IconClose, IconPlayground } from '@/components/Icons';
 
 // Lazy-load SearchModal to avoid hydration issues
 const SearchModal = dynamic(() => import('@/components/SearchModal'), { ssr: false });
 
 const links = [
-  { href: '/',         label: 'Home',     index: '00', Icon: IconHome },
-  { href: '/research', label: 'Research', index: '01', Icon: IconResearch },
-  { href: '/engines',  label: 'Engines',  index: '02', Icon: IconEngines },
-  { href: '/about',    label: 'About',    index: '03', Icon: IconAbout },
-  { href: '/contact',  label: 'Contact',  index: '04', Icon: IconContact },
+  { href: '/',            label: 'Home',       index: '00', Icon: IconHome },
+  { href: '/research',    label: 'Research',   index: '01', Icon: IconResearch },
+  { href: '/engines',     label: 'Engines',    index: '02', Icon: IconEngines },
+  { href: '/playground',  label: 'Playground', index: '03', Icon: IconPlayground },
+  { href: '/about',       label: 'About',      index: '04', Icon: IconAbout },
+  { href: '/contact',     label: 'Contact',    index: '05', Icon: IconContact },
 ];
 
 export default function Navbar() {

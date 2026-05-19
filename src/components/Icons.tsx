@@ -165,6 +165,17 @@ export function IconMenu({ size = defaults.size, color = defaults.color, classNa
   );
 }
 
+// Playground — interactive tool / terminal cursor
+export function IconPlayground({ size = defaults.size, color = defaults.color, className, strokeWidth = defaults.strokeWidth }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
+      <rect x="2" y="3" width="16" height="14" rx="2" stroke={color} strokeWidth={strokeWidth} fill="none"/>
+      <path d="M6 8 L9 11 L6 14" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="11" y1="14" x2="15" y2="14" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round"/>
+    </svg>
+  );
+}
+
 // Map of category → icon component
 export function CategoryIcon({ category, ...props }: { category: string } & IconProps) {
   const map: Record<string, React.ComponentType<IconProps>> = {

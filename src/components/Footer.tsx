@@ -62,6 +62,7 @@ export default function Footer() {
           <div className={styles.navCol}>
             <p className={styles.navLabel}>Site</p>
             <Link href="/research">Research</Link>
+            <Link href="/playground">Playground</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
           </div>

@@ -1,0 +1,467 @@
+/* ============================================================
+   BUILDATIONS — Revenue Intelligence Playground
+   Interactive deal scoring with real user inputs
+   ============================================================ */
+
+.playground {
+  background: var(--black);
+  color: var(--white);
+  padding: 40px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.playground::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F5E642 0%, #F5E64200 100%);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 20px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.engineTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F5E642;
+}
+
+.engineDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F5E642;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.playgroundTitle {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.resetBtn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.resetBtn:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: var(--white);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.fieldInput {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--white);
+  transition: border-color 0.2s;
+  width: 100%;
+  appearance: none;
+}
+
+.fieldInput:focus {
+  outline: none;
+  border-color: #F5E642;
+}
+
+.fieldInput::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+.fieldSelect {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--white);
+  transition: border-color 0.2s;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.fieldSelect:focus {
+  outline: none;
+  border-color: #F5E642;
+}
+
+.fieldSelect option {
+  background: #0A0A0A;
+  color: var(--white);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.runBtn {
+  background: #F5E642;
+  color: var(--black);
+  border: none;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.25s;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.runBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(245, 230, 66, 0.2);
+}
+
+.runBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.runBtnProcessing {
+  composes: runBtn;
+  background: rgba(245, 230, 66, 0.15);
+  color: #F5E642;
+  border: 1px solid rgba(245, 230, 66, 0.3);
+}
+
+/* Results */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 460px;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 48px;
+  text-align: center;
+  min-height: 460px;
+}
+
+.emptyGlyph {
+  font-size: 48px;
+  opacity: 0.06;
+  line-height: 1;
+}
+
+.emptyText {
+  font-size: 14px;
+  opacity: 0.3;
+  max-width: 28ch;
+  line-height: 1.5;
+}
+
+/* Processing state */
+.processing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 460px;
+}
+
+.processingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(245, 230, 66, 0.15);
+  border-top-color: #F5E642;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.processingSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.processingStep {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  animation: stepIn 0.4s ease forwards;
+}
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 0.5; transform: none; }
+}
+
+/* Score output */
+.output {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.scoreCard {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.scoreLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scoreLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.scoreValue {
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.scoreMeter {
+  width: 24px;
+  height: 80px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.scoreMeterFill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scoreVerdict {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.verdictBadge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+
+.verdictSub {
+  font-size: 11px;
+  opacity: 0.4;
+  text-align: right;
+}
+
+/* Factor breakdown */
+.factorsCard {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.factorsTitle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 16px;
+}
+
+.factor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 16px;
+  animation: factorIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes factorIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.factor:last-child { border-bottom: none; }
+
+.factorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factorName {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.factorDetail {
+  font-size: 11px;
+  opacity: 0.4;
+}
+
+.factorDelta {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Diagnosis */
+.diagnosisCard {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.diagnosisLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+
+.diagnosisText {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Recommendation */
+.recommendation {
+  border-left: 3px solid #F5E642;
+  padding: 12px 16px;
+}
+
+.recommendationText {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .playground { padding: 24px 16px; }
+  .fieldRow { grid-template-columns: 1fr; }
+  .scoreCard { flex-wrap: wrap; }
+}

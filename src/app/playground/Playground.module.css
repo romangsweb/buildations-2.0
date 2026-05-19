@@ -1,0 +1,204 @@
+/* ============================================================
+   BUILDATIONS — /playground hub
+   ============================================================ */
+
+.page {
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  padding: clamp(120px, 22vh, 220px) var(--margin) clamp(60px, 8vh, 100px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.glyphWrap {
+  opacity: 0.3;
+  line-height: 0;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+
+.title {
+  font-size: clamp(48px, 10vw, 120px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.6;
+  opacity: 0.5;
+  max-width: 52ch;
+  margin-bottom: 24px;
+}
+
+.count {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.25;
+}
+
+/* Engine nav */
+.engineNav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 var(--margin);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.engineNav::-webkit-scrollbar { display: none; }
+
+.engineNavInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  width: 100%;
+}
+
+.engineTab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.engineTab:hover { color: rgba(255,255,255,0.7); }
+
+.engineTabActive {
+  color: var(--white);
+}
+
+.engineTabDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Body */
+.body {
+  padding: clamp(40px, 6vh, 80px) var(--margin);
+}
+
+.bodyInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Info strip */
+.infoStrip {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.infoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+
+.infoText {
+  font-size: 13px;
+  opacity: 0.5;
+  line-height: 1.5;
+}
+
+/* CTA */
+.cta {
+  padding: clamp(60px, 8vh, 120px) var(--margin);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.ctaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.ctaText {
+  font-size: clamp(20px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 24ch;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--white);
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.ctaBtn:hover { opacity: 0.85; }
+
+@media (max-width: 768px) {
+  .ctaInner { flex-direction: column; align-items: flex-start; }
+  .engineTab { padding: 16px 20px; font-size: 12px; }
+}

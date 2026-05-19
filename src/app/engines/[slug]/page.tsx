@@ -3,9 +3,9 @@ import { getEngineBySlug } from '@/lib/payload'
 import styles from './EnginePage.module.css'
 import { getCaseStudiesByEngine } from '@/lib/payload'
 import Link from 'next/link'
-import SecuritySimulator from '@/components/SecuritySimulator'
-import RevenueSimulator from '@/components/RevenueSimulator'
-import SearchSimulator from '@/components/SearchSimulator'
+import SecurityPlayground from '@/components/SecurityPlayground'
+import RevenuePlayground from '@/components/RevenuePlayground'
+import SearchPlayground from '@/components/SearchPlayground'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -153,24 +153,24 @@ export default async function EnginePage({ params }: Props) {
           {engine.slug === 'adaptive-security' && (
             <section className={styles.simulatorSection}>
               <div className={styles.flowContainer}>
-                <p className={styles.sectionLabel}>Live simulation</p>
-                <SecuritySimulator />
+                <p className={styles.sectionLabel}>Live playground</p>
+                <SecurityPlayground />
               </div>
             </section>
           )}
           {engine.slug === 'revenue-intelligence' && (
             <section className={styles.simulatorSection}>
               <div className={styles.flowContainer}>
-                <p className={styles.sectionLabel}>Deal scoring demo</p>
-                <RevenueSimulator />
+                <p className={styles.sectionLabel}>Deal scoring playground</p>
+                <RevenuePlayground />
               </div>
             </section>
           )}
           {engine.slug === 'search-presence' && (
             <section className={styles.simulatorSection}>
               <div className={styles.flowContainer}>
-                <p className={styles.sectionLabel}>Content engine demo</p>
-                <SearchSimulator />
+                <p className={styles.sectionLabel}>Content engine playground</p>
+                <SearchPlayground />
               </div>
             </section>
           )}

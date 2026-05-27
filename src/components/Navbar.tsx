@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { Logo } from '@/components/Logo';
 import styles from '@/styles/Navbar.module.css';
 import { IconHome, IconResearch, IconEngines, IconAbout, IconContact, IconMenu, IconClose, IconPlayground } from '@/components/Icons';
 
@@ -64,10 +65,7 @@ export default function Navbar() {
       <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${dark ? styles.navDark : styles.navLight}`}>
         {/* Logo / Wordmark */}
         <Link href="/" className={styles.logo} aria-label="Buildations Home">
-          <span className={styles.logoIcon} aria-hidden="true">
-            <span className={styles.logoIconLetter}>B</span>
-            <span className={styles.logoIconDot} />
-          </span>
+          <Logo isDarkTheme={dark} className={styles.logoIcon} />
           <span className={styles.logoText}>Buildations</span>
         </Link>
 

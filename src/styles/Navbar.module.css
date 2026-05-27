@@ -44,39 +44,14 @@
 .logo:hover { opacity: 0.55; }
 
 .logoIcon {
-  width: 28px;
-  height: 28px;
-  background: var(--white);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 24px;
+  width: auto;
   flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s;
 }
 
 .logo:hover .logoIcon {
   transform: scale(0.95);
-}
-
-.logoIconLetter {
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--black);
-  line-height: 1;
-  font-family: var(--font-sans);
-  transition: color 0.2s;
-}
-
-.logoIconDot {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  width: 6px;
-  height: 6px;
-  background: var(--yellow);
 }
 
 .logoText {
@@ -191,9 +166,6 @@
   background: var(--white);
 }
 
-.navDark .logoIcon { background: var(--white); }
-.navDark .logoIconLetter { color: var(--black); }
-
 .navLight .logoText,
 .navLight .navLink,
 .navLight .menuBtn { color: var(--black); }
@@ -202,9 +174,6 @@
   color: var(--white);
   background: var(--black);
 }
-
-.navLight .logoIcon { background: var(--black); }
-.navLight .logoIconLetter { color: var(--white); }
 
 .navLight.scrolled {
   background: rgba(245, 245, 240, 0.92);

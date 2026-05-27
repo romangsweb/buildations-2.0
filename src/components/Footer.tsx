@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import styles from '@/styles/Footer.module.css'
+import { Logo } from '@/components/Logo'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -18,30 +19,55 @@ export default function Footer() {
             className={styles.newsletterForm}
             action="https://formspree.io/f/buildations"
             method="POST"
-            aria-label="Suscribirse al newsletter"
           >
             <input
               type="email"
               name="email"
-              placeholder="tu@email.com"
-              required
               className={styles.newsletterInput}
-              aria-label="Tu email"
+              placeholder="Email address"
+              required
             />
             <button type="submit" className={styles.newsletterBtn}>
-              Suscribirse →
+              Subscribe
             </button>
           </form>
+        </div>
+      </div>
+
+      {/* Enterprise Trust and Security Strip */}
+      <div className={styles.trustBar}>
+        <div className={styles.trustInner}>
+          <div className={styles.trustItem}>
+            <span className={styles.trustTitle}>Zero Data Retention</span>
+            <p className={styles.trustDesc}>
+              No entrenamos modelos con tus datos. Inferencia 100% privada sin persistencia de logs.
+            </p>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustTitle}>Private VPC Hosting</span>
+            <p className={styles.trustDesc}>
+              Despliegues aislados en nubes virtuales dedicadas (AWS, GCP, Azure) o bare-metal propio.
+            </p>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustTitle}>Compliance Ready</span>
+            <p className={styles.trustDesc}>
+              Estructura técnica y blueprints de datos diseñados para auditorías SOC 2, HIPAA y GDPR.
+            </p>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustTitle}>99.95% Infrastructure SLA</span>
+            <p className={styles.trustDesc}>
+              Acuerdos institucionales de nivel de servicio para pipelines críticos de producción.
+            </p>
+          </div>
         </div>
       </div>
 
       <div className={styles.top}>
         <div className={styles.brand}>
           <div className={styles.footerLogo}>
-            <span className={styles.footerLogoIcon} aria-hidden="true">
-              <span className={styles.footerLogoLetter}>B</span>
-              <span className={styles.footerLogoDot} />
-            </span>
+            <Logo isDarkTheme={true} className={styles.footerLogoIcon} />
             <span className={styles.wordmark}>Buildations</span>
           </div>
           <p className={styles.tagline}>

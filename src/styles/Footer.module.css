@@ -111,33 +111,9 @@
 }
 
 .footerLogoIcon {
-  width: 28px;
-  height: 28px;
-  background: var(--white);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 24px;
+  width: auto;
   flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.footerLogoLetter {
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--black);
-  line-height: 1;
-  font-family: var(--font-sans);
-}
-
-.footerLogoDot {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  width: 6px;
-  height: 6px;
-  background: var(--yellow);
 }
 
 .wordmark {
@@ -262,6 +238,44 @@
 }
 
 /* ============================================================
+   ENTERPRISE TRUST BAR
+   ============================================================ */
+
+.trustBar {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(40px, 6vh, 60px) var(--margin);
+  background: rgba(255,255,255,0.01);
+}
+
+.trustInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.trustItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trustTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.trustDesc {
+  font-size: 12px;
+  opacity: 0.4;
+  line-height: 1.5;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -271,6 +285,7 @@
   .newsletterInner { flex-direction: column; align-items: flex-start; }
   .newsletterForm { width: 100%; min-width: unset; }
   .newsletterInput { flex: 1; }
+  .trustInner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 
 @media (max-width: 500px) {
@@ -279,4 +294,5 @@
   .newsletterForm { flex-direction: column; }
   .newsletterInput { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
   .newsletterBtn { width: 100%; text-align: center; padding: 14px; }
+  .trustInner { grid-template-columns: 1fr; gap: 20px; }
 }
